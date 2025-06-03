@@ -81,7 +81,7 @@ function MainPage() {
                     >
                         <video
                             ref={videoRef}
-                            src="/public/Videos/HeroVideo.mp4"
+                            src="/Videos/HeroVideo.mp4"
                             className="object-cover w-full h-full"
                             autoPlay
                             loop

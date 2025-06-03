@@ -113,7 +113,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <img
-                        src="/public/Photos/Footer.avif"
+                        src="/Photos/Footer.avif"
                         alt="Services Background"
                         className="absolute w-[90vw] md:w-[50rem] top-110 md:top-90 md:left-[35rem] left-1/2 -translate-x-1/2 object-cover opacity-8 mix-blend-luminosity pointer-events-none select-none"
                         style={{ zIndex: 1 }}
