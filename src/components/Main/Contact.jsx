@@ -137,7 +137,7 @@ const Contact = () => {
         <link rel="canonical" href="https://zenerationmedia.in/contact" />
       </Helmet>
 
-      <img src="/Public/Logo/EyeLogo.jpg" alt="Zeneration Media Logo" className="mb-6 h-12 z-[50]" />
+      <img src="/Logo/EyeLogo.jpg" alt="Zeneration Media Logo" className="mb-6 h-12 z-[50]" />
 
       <h1 className="text-3xl md:text-5xl font-bold text-center mb-3 z-[50]">
         Let's Connect!!
@@ -153,7 +153,7 @@ const Contact = () => {
           onClick={handleWhatsappClick}
           aria-label="Contact via WhatsApp"
         >
-          <img className='h-8' src="/Public/Logo/WhatsappLogo.png" alt="WhatsApp Logo" />
+          <img className='h-8' src="/Logo/WhatsappLogo.png" alt="WhatsApp Logo" />
           <span className="text-white">Whatsapp</span>
           <i className="ri-arrow-right-s-line"></i>
         </div>
@@ -163,7 +163,7 @@ const Contact = () => {
           onClick={handleEmailClick}
           aria-label="Contact via Email"
         >
-          <img className='h-8' src='/public/Photos/remove/EmailLogo.png' alt="Email Logo" />
+          <img className='h-8' src='/Photos/remove/EmailLogo.png' alt="Email Logo" />
           <span className="text-white">Email</span>
           <i className="ri-arrow-right-s-line"></i>
         </div>
@@ -173,7 +173,7 @@ const Contact = () => {
           onClick={handlePhoneClick}
           aria-label="Request a callback"
         >
-          <img className='h-8' src="/public/Photos/remove/PhoneLogo.png" alt="Phone Icon" />
+          <img className='h-8' src="/Photos/remove/PhoneLogo.png" alt="Phone Icon" />
           <span className="text-white">Call Request</span>
           <i className="ri-arrow-right-s-line"></i>
         </div>
