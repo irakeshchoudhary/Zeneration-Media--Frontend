@@ -34,8 +34,8 @@ const Navbar = () => {
     `hover:text-yellow-400 transition-all font-['Gilroy-Bold'] text-white/80 px-2 py-1 ${isActive ? 'text-yellow-400 underline underline-offset-4' : ''}`;
 
   // Logo src
-  const logoSrc = isServices ? '/Logo/EyeLogo-TransparentBg.png' : '../public/Logo/EyeLogo.jpg';
-  const mobileLogoSrc = isServices ? '/Logo/EyeLogo-TransparentBg.png' : '../public/Logo/EyeLogo-TransparentBg.png';
+  const logoSrc = isServices ? '/Logo/EyeLogo-TransparentBg.png' : '/Logo/EyeLogo.jpg';
+  const mobileLogoSrc = isServices ? '/Logo/EyeLogo-TransparentBg.png' : '/Logo/EyeLogo-TransparentBg.png';
 
   // Navbar bg
   // const navbarBg = isServices = '';

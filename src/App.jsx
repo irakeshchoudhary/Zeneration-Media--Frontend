@@ -69,7 +69,7 @@ const App = () => {
         className="fixed bottom-4 right-4 z-60"
         style={{ width: 60, height: 60 }}
       >
-        <img src="/public/Logo/Whatsapplogo.png" alt="WhatsApp" className="w-full h-full object-contain" />
+        <img src="/Logo/Whatsapplogo.png" alt="WhatsApp" className="w-full h-full object-contain" />
       </a>
       <Suspense fallback={
         <div className="flex items-center justify-center min-h-screen w-full">
