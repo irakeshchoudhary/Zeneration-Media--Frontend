@@ -147,13 +147,13 @@ const Contact = () => {
         Choose how you want to reach us or let us get in touch with you.
       </p>
 
-      <div className='flex flex-wrap items-center justify-center gap-4 md:gap-2 z-[50]'>
+      <div className='flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 z-[50]'>
         <div
           className='px-5 py-1 bg-zinc-900 grainy-filter rounded-md flex items-center justify-center gap-2 cursor-pointer transform transition-all ease-in-out duration-300 hover:bg-zinc-800 hover:-translate-y-[0.5] hover:scale-[1.03] hover:-translate-x-[0.5] hover:rotate-4 border-[0.5px] border-zinc-900 w-full sm:w-auto'
           onClick={handleWhatsappClick}
           aria-label="Contact via WhatsApp"
         >
-          <img className='h-8' src="/Logo/WhatsappLogo.png" alt="WhatsApp Logo" />
+          <img className='h-8' src="/Logo/Whatsapplogo.png" alt="WhatsApp Logo" />
           <span className="text-white">Whatsapp</span>
           <i className="ri-arrow-right-s-line"></i>
         </div>
@@ -191,7 +191,7 @@ const Contact = () => {
           />
 
           <div className="fixed inset-0 z-50 flex font-['F3'] items-center justify-center px-4">
-            <div className="relative bg-zinc-950 rounded-xl shadow-2xl w-full max-w-sm md:max-w-md p-6 md:p-8 backdrop-blur-lg">
+            <div className="relative bg-zinc-950 rounded-xl shadow-2xl w-full max-w-sm md:max-w-md lg:max-w-lg p-6 md:p-8 backdrop-blur-lg">
               <button
                 className="absolute top-3 cursor-pointer right-3 text-zinc-500 hover:text-white text-2xl font-bold transition"
                 onClick={handleClosePopup}

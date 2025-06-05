@@ -100,7 +100,7 @@ const Footer = () => {
                             <div className='flex flex-col justify-center gap-1 items-left md:items-start'>
                                 <h4 className='text-sm font-["Gilroy-SemiBold"] text-white mb-2'>SITE</h4>
                                 <Link to="/services" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Services</Link>
-                                <Link to="/contact" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Contact Us</Link>
+                                <Link to="/contact" className='text-xs font-["F3"] cursor-pointer text-nowrap hover:text-zinc-400 transition-all ease-in-out duration-300'>Contact Us</Link>
                                 <Link to="/about" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>About</Link>
                                 <Link to="/faqs" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>FAQs</Link>
                             </div>

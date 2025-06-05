@@ -39,8 +39,6 @@ const clients = [
     },
 ];
 
-const CARD_WIDTH = 420;
-const CARD_GAP = 32;
 const BORDER_COLORS = [
     'border-red-400',
     'border-blue-400',
@@ -78,7 +76,8 @@ const Clients = () => {
 
                 // Measure actual gap between cards using getComputedStyle
                 const computedStyle = window.getComputedStyle(containerElement);
-                const actualGap = parseFloat(computedStyle.gap) || 0; // Get the gap value, default to 0 if not found
+                // Use the gap property from the flex container
+                const actualGap = parseFloat(computedStyle.gap) || 0;
 
                 const totalVisibleCardWidth = (actualCardWidth + actualGap) * clients.length;
                 const totalContainerWidth = totalVisibleCardWidth * REPEAT;
@@ -87,14 +86,13 @@ const Clients = () => {
                 setContainerWidth(totalContainerWidth);
                 setLoopWidth(calculatedLoopWidth);
 
-                // Restart animation with new dimensions
+                // Restart animation with new dimensions if not paused
                 if (!paused) {
                     controls.stop();
-                    // Reset position to maintain visual continuity if needed,
-                    // or simply restart animation from currentX
-                    // For simplicity, let's restart animation.
-                    // A more complex solution might involve calculating the new currentX based on percentage.
-                    animateScroll(currentX, calculatedLoopWidth);
+                    // Recalculate currentX based on the new loopWidth to maintain visual position
+                    const newCurrentX = (currentX % loopWidth) || 0; // Use modulo to keep it within new loop bounds
+                    setCurrentX(newCurrentX);
+                    animateScroll(newCurrentX, calculatedLoopWidth);
                 }
             }
         };
@@ -109,21 +107,31 @@ const Clients = () => {
             window.removeEventListener('resize', calculateDimensions);
             controls.stop(); // Stop animation on unmount
         };
-    }, [clients.length, paused, controls, currentX]); // Dependencies include values that affect calculation or animation restart
+    }, [clients.length, paused, controls]); // Removed currentX from dependencies to prevent infinite loop
 
     // Animation logic with resume from currentX
     // Extracted animation logic into a function
     const animateScroll = useCallback(async (fromX, width) => {
-        const targetWidth = width || loopWidth; // Use provided width or state width
+        const targetWidth = width; // Use provided width
         let startX = fromX;
-        // Ensure startX is within the loop bounds if it goes beyond
+        // Ensure startX is within the loop bounds
         while (startX <= -targetWidth) startX += targetWidth;
         while (startX > 0) startX -= targetWidth;
 
-        // Calculate the new duration for a 1% speed increase
-        const originalBaseDuration = 12;
-        const speedIncreaseFactor = 1.1; // Increased speed (1.1 for 10% faster, adjust as needed)
-        const newBaseDuration = originalBaseDuration / speedIncreaseFactor; // New, shorter duration for one loop
+        // Calculate the new duration based on the distance to cover and the targetWidth (which represents one loop)
+        // We want the speed to be constant regardless of screen size, so the duration should be proportional to the targetWidth
+        // Let's assume a base speed such that one full loop (targetWidth) takes baseDuration seconds.
+        const baseDuration = 45; // Adjust this value to control the speed (seconds for one full loop)
+
+        // Calculate the duration for the current segment based on the remaining distance
+        // If startX is 0, duration is baseDuration. If startX is -targetWidth, duration is also baseDuration.
+        // For a value in between, the duration is (distance_to_cover / targetWidth) * baseDuration
+        // The distance to cover from startX to -targetWidth is Math.abs(-targetWidth - startX)
+        const distanceToCover = Math.abs(-targetWidth - startX);
+
+        // Prevent division by zero if targetWidth is 0 (e.g., on initial render before measurements)
+        const duration = targetWidth > 0 ? (distanceToCover / targetWidth) * baseDuration : baseDuration;
+
 
         await controls.start({
             x: [startX, -targetWidth],
@@ -131,26 +139,27 @@ const Clients = () => {
                 x: {
                     repeat: Infinity,
                     repeatType: 'loop',
-                    // Use the new base duration for the duration calculation
-                    duration: newBaseDuration * (1 - Math.abs(startX) / targetWidth),
+                    duration: duration,
                     ease: 'linear',
                 },
             },
+            onUpdate: (latest) => setCurrentX(latest.x), // Update currentX during animation
         });
-    }, [controls, loopWidth]); // Depend on controls and loopWidth
+    }, [controls]); // Depend on controls
 
     useEffect(() => {
-        // Start animation when containerWidth (and thus loopWidth) is calculated
+        // Start animation when containerWidth and loopWidth are calculated and not paused
         if (containerWidth > 0 && loopWidth > 0 && !paused) {
-            animateScroll(currentX, loopWidth);
+            animateScroll(currentX, loopWidth); // Start animation from currentX
         }
-        // Cleanup function
+        // Cleanup function to stop animation when component unmounts or dependencies change
         return () => controls.stop();
-    }, [containerWidth, loopWidth, paused, controls, animateScroll, currentX]);
+    }, [containerWidth, loopWidth, paused, controls, animateScroll, currentX]); // Added currentX as dependency here to correctly restart animation if it changes externally
 
     // Fix: Resume animation after tab switch/visibility change
     useEffect(() => {
         const handleVisibility = () => {
+            // Only restart animation if the tab becomes visible AND it was not explicitly paused by the user
             if (!document.hidden && !paused && containerWidth > 0 && loopWidth > 0) {
                 controls.stop();
                 controls.set({ x: currentX }); // Set to current X position
@@ -159,62 +168,58 @@ const Clients = () => {
                 controls.stop(); // Stop animation when tab is not visible
             }
         };
+        // Add event listener to the document for visibility changes
         document.addEventListener('visibilitychange', handleVisibility);
+        // Cleanup function to remove the event listener
         return () => document.removeEventListener('visibilitychange', handleVisibility);
-    }, [paused, containerWidth, controls, currentX, loopWidth, animateScroll]); // Added loopWidth and animateScroll to dependencies
-
-    // Track current X position
-    const handleUpdate = (latest) => {
-        setCurrentX(latest.x);
-    };
+    }, [paused, containerWidth, controls, currentX, loopWidth, animateScroll]); // Added currentX, loopWidth, animateScroll to dependencies
 
     // Pause on hover
     const handleMouseEnter = () => setPaused(true);
     const handleMouseLeave = () => setPaused(false);
 
-    // Centering logic - might need adjustment for dynamic card width
-    // const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
-    // useEffect(() => {
-    //     const handleResize = () => setViewportWidth(window.innerWidth);
-    //     window.addEventListener('resize', handleResize);
-    //     return () => window.removeEventListener('resize', handleResize);
-    // }, []);
-    // const centerOffset = (viewportWidth - CARD_WIDTH) / 2; // Uses fixed CARD_WIDTH
+    // Track which card is visually at the center (for border color cycling)
+    useEffect(() => {
+        const updateCenter = () => {
+            if (!containerRef.current || !cardRef.current) return;
 
-    // Find the center card index (visually) - This logic might also need dynamic width adjustment
-    // Currently relies on viewportWidth which is updated on resize, but cardWidth is fixed.
-    // const visibleCards = Math.floor(viewportWidth / (CARD_WIDTH + CARD_GAP));
-    // const centerCardIdx = Math.floor(REPEAT * clients.length / 2);
+            const containerRect = containerRef.current.getBoundingClientRect();
+            const cardWidth = cardRef.current.getBoundingClientRect().width;
+            const computedStyle = window.getComputedStyle(containerRef.current);
+            const actualGap = parseFloat(computedStyle.gap) || 0;
+            const cardAndGap = cardWidth + actualGap;
 
-    // Track which card is visually at the center (for border color cycling) - This logic needs dynamic width adjustment
-    // useEffect(() => {
-    //     const updateCenter = () => {
-    //         if (!containerRef.current) return;
-    //         const containerRect = containerRef.current.getBoundingClientRect();
-    //         let minDist = Infinity;
-    //         let idx = 0;
-    //         // This loop also uses fixed CARD_WIDTH and CARD_GAP
-    //         for (let i = 0; i < TOTAL_CARDS; i++) {
-    //             const cardLeft = containerRect.left + i * (CARD_WIDTH + CARD_GAP);
-    //             const cardCenter = cardLeft + CARD_WIDTH / 2;
-    //             const dist = Math.abs(cardCenter - (window.innerWidth / 2));
-    //             if (dist < minDist) {
-    //                 minDist = dist;
-    //                 idx = i;
-    //             }
-    //         }
-    //         setCenterIdx(idx);
-    //     };
-    //     const interval = setInterval(updateCenter, 100);
-    //     return () => clearInterval(interval);
-    // }, [containerWidth]); // containerWidth is currently calculated with fixed sizes
+            if (cardAndGap <= 0) return; // Prevent division by zero
+
+            let minDist = Infinity;
+            let idx = 0;
+
+            // Calculate the center of the viewport
+            const viewportCenter = window.innerWidth / 2;
+
+            for (let i = 0; i < TOTAL_CARDS; i++) {
+                // Calculate the center of each card relative to the viewport
+                const cardLeftRelativeToViewport = containerRect.left + i * cardAndGap;
+                const cardCenterRelativeToViewport = cardLeftRelativeToViewport + cardWidth / 2;
+
+                const dist = Math.abs(cardCenterRelativeToViewport - viewportCenter);
+
+                if (dist < minDist) {
+                    minDist = dist;
+                    idx = i;
+                }
+            }
+            setCenterIdx(idx);
+        };
+
+        // Update center index more frequently for smoother effect
+        const interval = setInterval(updateCenter, 50); // Increased frequency
+
+        return () => clearInterval(interval);
+    }, [containerWidth, loopWidth, currentX, clients.length]); // Added dependencies that affect positioning
 
     // Center card's border color cycles through BORDER_COLORS
-    // const borderColor = BORDER_COLORS[centerIdx % BORDER_COLORS.length]; // Relies on centerIdx
-
-    // The centering/border color logic needs to be updated to use dynamic measurements.
-    // For now, let's use a simple default border color or remove the dynamic border color feature temporarily
-    const borderColor = BORDER_COLORS[centerIdx % BORDER_COLORS.length]; // Keeping for now, but note it might not be perfectly accurate on mobile
+    const borderColor = BORDER_COLORS[centerIdx % BORDER_COLORS.length];
 
     return (
         <section className="relative min-h-[600px] flex flex-col items-center justify-center px-4 py-20 overflow-x-hidden">
@@ -230,22 +235,25 @@ const Clients = () => {
             </p>
             <div className="relative w-full flex items-center justify-center mt-4" style={{ height: 350 }}>
                 {/* Left Blur - Adjust visibility or size for mobile */}
-                <div className="absolute -left-10 w-16 md:-left-24 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} /> {/* Adjusted width and position, added gradient */}
+                {/* Adjusted blur width and position for better responsiveness */}
+                <div className="absolute left-0 w-1/4 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} />
                 {/* Right Blur - Adjust visibility or size for mobile */}
-                <div className="absolute -right-10 w-16 md:-right-24 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} /> {/* Adjusted width and position, added gradient */}
+                {/* Adjusted blur width and position for better responsiveness */}
+                <div className="absolute right-0 w-1/4 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} />
 
                 <div
-                    className="relative flex items-center justify-center w-full max-w-5xl overflow-hidden z-20"
+                    className="relative flex items-center justify-center w-full max-w-7xl overflow-hidden z-20"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
                     <motion.div
                         ref={containerRef}
+                        // Use responsive gap and flexible width for cards
                         className="flex gap-4 md:gap-8 items-center flex-nowrap"
                         animate={controls}
                         initial={{ x: 0 }}
                         style={{ minWidth: containerWidth }} // Use dynamically calculated containerWidth
-                        onUpdate={handleUpdate}
+                        onUpdate={(latest) => setCurrentX(latest.x)} // Update currentX during animation
                     >
                         {Array(REPEAT).fill(0).flatMap((_, repIdx) =>
                             clients.map((client, idx) => {
@@ -256,8 +264,9 @@ const Clients = () => {
                                         key={`${repIdx}-${idx}`}
                                         // Assign ref to the first card to measure
                                         ref={repIdx === 0 && idx === 0 ? cardRef : null}
+                                        // Use responsive width for cards
                                         className={`relative flex flex-col justify-between items-start bg-[#181c1b] rounded-xl shadow-lg transition-all ease-in duration-300 ${isCenter ? borderColor + ' scale-100 border-[0.01px] z-10' : 'border-transparent scale-90 border-[0.01px] z-0'} w-[85vw] max-w-[420px] h-[340px] p-0 cursor-pointer overflow-hidden flex-shrink-0`}
-                                        style={{ fontFamily: 'F3', height: 340 }}
+                                        style={{ fontFamily: 'F3', height: 340 }} // Keep height fixed or make responsive if needed
                                         onMouseEnter={() => setHovered(repIdx * clients.length + idx)}
                                         onMouseLeave={() => setHovered(null)}
                                     >

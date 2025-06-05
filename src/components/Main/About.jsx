@@ -54,11 +54,11 @@ const About = () => {
                 <img
                     src="/Logo/EyeLogo.jpg"
                     alt="Rakesh Choudhary"
-                    className="absolute md:top-24 top-18 right-[110] md:w-20 md:h-20 w-12 h-12 rounded-full object-cover border-2 border-[#232927] mb-6 shadow-md"
+                    className="absolute md:top-20 top-18 md:left-[8px] md:w-20 md:h-20 w-12 h-12 rounded-full object-cover border-2 border-[#232927] mb-6 shadow-md"
                 />
                 <div>
                     <h1 className="text-4xl md:text-5xl text-white text-center mb-8">About</h1>
-                    <div className="text-[#e5e5e5] md:ml-24 ml-14 text-sm md:text-sm font-['F3'] text-left space-y-4">
+                    <div className="text-[#e5e5e5] md:ml-24 ml-14 text-xs sm:text-sm md:text-base font-['F3'] text-left space-y-4">
                         <p>Hello! I'm <span className="text-blue-400 font-Gilroy-SemiBold">Rakesh Choudhary</span>, the founder of Zeneration Media.</p>
                         <p>We're a young, passionate team based in Kalyan with one mission:<br />To help real estate and local businesses not just grow — but truly shine.</p>
                         <p>The idea for Zeneration Media was born out of a simple observation.<br />I saw how countless amazing local businesses were struggling — not because their products or services were lacking, but because they weren't being seen, heard, or understood online.</p>
@@ -86,27 +86,27 @@ const About = () => {
                 <div className="flex flex-wrap items-center justify-center gap-8 mt-6">
                     {[
                         {
-                            name: "Aryan Mehta",
-                            role: "Sales Manager",
+                            name: "Vikas Dubey",
+                            role: "Performance Marketer",
                             img: "https://randomuser.me/api/portraits/men/32.jpg",
                         },
                         {
-                            name: "Nisha Patel",
+                            name: "Manish Yadav",
                             role: "Creative Director",
                             img: "https://randomuser.me/api/portraits/women/44.jpg",
                         },
                         {
-                            name: "Rahul Verma",
-                            role: "Performance Marketer",
+                            name: "Rutik Raut",
+                            role: "Reports & Docs Manager",
                             img: "https://randomuser.me/api/portraits/men/58.jpg",
                         },
                         {
-                            name: "Sanya Kapoor",
-                            role: "Client Success Manager",
+                            name: "Aftab Mahagonde",
+                            role: "Client Manager",
                             img: "https://randomuser.me/api/portraits/women/68.jpg",
                         },
                     ].map((member, index) => (
-                        <div key={index} className="flex items-center justify-center text-center">
+                        <div key={index} className="flex items-center justify-center text-center ">
                             <img
                                 src={member.img}
                                 alt={member.name}

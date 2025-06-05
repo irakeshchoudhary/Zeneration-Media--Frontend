@@ -87,7 +87,7 @@ const App = () => {
                   <div className="fixed top-0 left-0 w-full z-[100]">
                     <Navbar />
                   </div>
-                  <div className="Hero relative overflow-hidden p-6 h-auto z-10">
+                  <div className="Hero relative overflow-hidden pt-24 md:pt-32 p-4 md:p-6 h-auto z-10">
                     <div
                       className="absolute inset-0 w-full h-full pointer-events-none z-10"
                       style={{
@@ -190,7 +190,7 @@ const App = () => {
               element={
                 <motion.div {...pageTransition}>
                   <Navbar />
-                  <div className="pt-24 px-4 text-center text-white min-h-[60vh] flex flex-col items-center justify-center">
+                  <div className="pt-24 px-4 text-center text-white min-h-[calc(100vh-var(--navbar-height)-var(--footer-height))] flex flex-col items-center justify-center">
                     <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
                     <p className="text-lg text-zinc-500">Sorry, the page you are looking for does not exist.</p>
                   </div>

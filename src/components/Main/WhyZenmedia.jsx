@@ -10,12 +10,12 @@ const WhyZenmedia = () => (
                 alt="Rakesh Choudhary"
                 className="absolute top-24 right-[110] w-20 h-20 rounded-full object-cover border-2 border-[#232927] mb-6 shadow-md"
             /> */}
-            <div className="w-full max-w-5xl mx-auto px-4 py-16">
-                <h1 className="text-4xl md:text-5xl text-white text-center mb-14 font-bold font-['F3']">
+            <div className="w-full max-w-4xl mx-auto px-4 py-12 md:py-16">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl text-white text-center mb-10 md:mb-14 font-bold font-['F3']">
                     Why Choose Us?
                 </h1>
 
-                <div className="text-[#e5e5e5] text-sm md:text-base font-['F1'] space-y-10 leading-relaxed">
+                <div className="text-[#e5e5e5] text-sm md:text-base font-['F1'] space-y-8 md:space-y-10 leading-relaxed">
 
                     {/* STORY + STRATEGIC INTRO */}
                     <div>
@@ -23,7 +23,7 @@ const WhyZenmedia = () => (
                             Real experience beats theory — and the foundation of <span className="text-yellow-400 font-semibold">Zeneration Media</span> is built on that belief.
                             Let me share a personal story that shaped how we approach marketing, branding, and growth for every client we work with.
                         </p>
-                        <div className="w-full h-52 md:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-sm italic">
+                        <div className="w-full h-40 md:h-52 lg:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-xs md:text-sm italic">
                             Add a relevant image or illustration here
                         </div>
                     </div>
@@ -35,7 +35,7 @@ const WhyZenmedia = () => (
                             I've seen him grow it from door-to-door sales on a bicycle to a known local store — all through persistence and community trust.
                             But when the pandemic hit in 2020, like many small businesses, we were hit hard.
                         </p>
-                        <div className="w-full h-52 md:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-sm italic">
+                        <div className="w-full h-40 md:h-52 lg:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-xs md:text-sm italic">
                             Add a photo of the shop or early days
                         </div>
                     </div>
@@ -66,7 +66,7 @@ const WhyZenmedia = () => (
                             I redesigned the store, listed it on Google Maps, improved customer interaction, and built real visibility.
                             Gradually, people started responding. Not because of a fancy product — but because of the <em>consistent presence</em>.
                         </p>
-                        <div className="w-full h-52 md:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-sm italic">
+                        <div className="w-full h-40 md:h-52 lg:h-64 bg-zinc-800/50 border border-zinc-700 rounded-lg mt-4 flex items-center justify-center text-zinc-400 text-xs md:text-sm italic">
                             Add before/after branding visuals
                         </div>
                     </div>
@@ -82,10 +82,10 @@ const WhyZenmedia = () => (
 
                     {/* WHAT WE LEARNED */}
                     <div>
-                        <p className="mb-2">
+                        <p className="mb-3 md:mb-2">
                             What I learned through this journey became the core of how we serve our clients today:
                         </p>
-                        <ul className="pl-4 space-y-3 text-green-400">
+                        <ul className="pl-4 space-y-2 md:space-y-3 text-green-400 text-sm md:text-base">
                             <li className="flex items-start gap-2">
                                 ✅ <span className="text-[#e5e5e5]">Marketing without trust is wasted budget.</span>
                             </li>

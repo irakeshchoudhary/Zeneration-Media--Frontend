@@ -59,10 +59,10 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
 
     // Overlay for background dull + image
     const Overlay = () => (
-        <div className="fixed inset-0 z-[49] flex items-center justify-center" style={{ pointerEvents: 'none' }}>
+        <div className="fixed inset-0 z-[50] flex items-center justify-center" style={{ pointerEvents: 'none' }}>
             {/* Overlay with background image and dull effect */}
             <div
-                className="fixed inset-0 bg-black/50 bg-opacity-90 backdrop-blur-xs"
+                className="fixed inset-0 bg-black/80 bg-opacity-95 backdrop-blur-sm"
             />
         </div>
     );
@@ -97,14 +97,14 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                     >
                         <div className="fixed inset-0 bg-black/60" />
                         <motion.div
-                            className="flex flex-col items-center justify-center bg-white dark:bg-[#181818] max-w-[350px] rounded-xl shadow-xl p-8 z-[101]"
+                            className="flex flex-col items-center justify-center bg-white dark:bg-[#181818] max-w-[300px] sm:max-w-[350px] rounded-xl shadow-xl p-6 sm:p-8 z-[101]"
                             initial="hidden"
                             animate="visible"
                             exit="exit"
                             variants={dialogVariants}
                         >
                             <PartyEffect />
-                            <div className="text-center mt-2 text-2xl font-bold text-zinc-900 dark:text-white" style={{ fontFamily: 'Gilroy-SemiBold' }}>Thank you!</div>
+                            <div className="text-center mt-2 text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white" style={{ fontFamily: 'Gilroy-SemiBold' }}>Thank you!</div>
                             <div className="text-center mt-2 text-sm text-zinc-600 dark:text-white">Our team will contact you soon.</div>
                         </motion.div>
                     </motion.div>
@@ -114,7 +114,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
             <AnimatePresence>
                 {open && (
                     <motion.div
-                        className="fixed inset-0 z-[100] flex items-center justify-center"
+                        className="fixed inset-0 z-[100] flex items-center justify-center px-4"
                         initial="hidden"
                         animate="visible"
                         exit="exit"
@@ -123,16 +123,16 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
 
                         <div className="fixed inset-0" style={{ pointerEvents: 'none' }} />
                         <motion.div
-                            className="min-w-[340px] bg-white dark:bg-zinc-950 rounded-xl shadow-xl px-4 py-1 z-[101]"
+                            className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-zinc-950 rounded-xl shadow-xl px-4 py-1 z-[101]"
                             initial="hidden"
                             animate="visible"
                             exit="exit"
                             variants={dialogVariants}
                         >
-                            <div className="mb-2 text-zinc-900 text-center mt-4 dark:text-white text-lg font-bold" style={{ fontFamily: 'Gilroy-SemiBold' }}>
+                            <div className="mb-2 text-zinc-900 text-center mt-4 dark:text-white text-md sm:text-lg font-bold" style={{ fontFamily: 'Gilroy-SemiBold' }}>
                                 We're here to answer any question you may have.
                             </div>
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-2 px-6 pb-6 pt-2">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-2 px-4 pb-4 pt-2 sm:px-6 sm:pb-6">
                                 {/* Name */}
                                 <div className="flex flex-col gap-1">
                                     <label htmlFor="name" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">Your Name</label>

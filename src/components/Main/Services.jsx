@@ -130,7 +130,7 @@ export default function Services() {
                 <meta name="description" content="Boost your business with expert full funnel marketing, performance marketing, real estate marketing, digital solutions for salons, and WhatsApp sales funnel setup." />
             </Helmet>
             <section
-                className="relative w-full flex flex-col items-center px-4 pt-48 pb-24"
+                className="relative w-full flex flex-col items-center px-4 pt-32 pb-16 md:pt-48 md:pb-24"
                 style={{ backgroundColor: "#0C1012" }}
             >
                 {/* Background Image (still decorative) */}
@@ -142,14 +142,14 @@ export default function Services() {
                 />
 
                 {/* Content Wrapper with fixed width/padding */}
-                <div className="relative z-10 w-full md:max-w-[65%] mx-auto md:px-0 font-['F3']">
+                <div className="relative z-10 w-full md:max-w-[90%] lg:max-w-[80%] xl:max-w-[65%] mx-auto md:px-0 font-['F3']">
 
                     {/* Title & Subtitle (Animated) */}
                     <motion.h1
                         variants={fadeIn}
                         initial="initial"
                         animate="animate"
-                        className="text-5xl mt-34 sm:text-6xl font-bold mb-4 text-white text-left"
+                        className="text-4xl mt-24 sm:text-5xl md:text-6xl font-bold mb-4 text-white text-left"
                     >
                         Solutions We Offer
                     </motion.h1>
@@ -157,34 +157,34 @@ export default function Services() {
                         variants={fadeIn}
                         initial="initial"
                         animate="animate"
-                        className="text-md text-zinc-300 max-w-2xl mb-6 text-left"
+                        className="text-sm sm:text-base text-zinc-300 max-w-2xl mb-6 text-left"
                     >
                         Every service we offer is focused on one thing — business growth. Whether you want more leads, sales, or visibility — we've got you covered.
                     </motion.p>
 
                     {/* CTA Button */}
-                    <div className="w-full flex justify-left mb-24">
+                    <div className="w-full flex justify-left mb-16 md:mb-24">
                         <LeadFormDialog triggerButtonText="Get Free Consultation" buttonClassName="w-44 text-sm font-['Gilroy-SemiBold']" />
                     </div>
 
                     {/* Benefits Tags */}
-                    <div className="mt-8 flex flex-wrap justify-left gap-4 text-xs font-['F3'] text-zinc-300">
-                        <p className="flex items-center gap-1"><Ghost /> Visibility</p>
-                        <p className="flex items-center gap-1"><Ribbon /> Branding</p>
-                        <p className="flex items-center gap-1"><ChartNoAxesCombined /> Conversion</p>
-                        <p className="flex items-center gap-1"><Zap /> Automation</p>
-                        <p className="flex items-center gap-1"><HeartHandshake /> Trust</p>
+                    <div className="mt-8 flex flex-wrap justify-left gap-3 sm:gap-4 text-xs sm:text-sm font-['F3'] text-zinc-300">
+                        <p className="flex items-center gap-1"><Ghost className="h-4 w-4" /> Visibility</p>
+                        <p className="flex items-center gap-1"><Ribbon className="h-4 w-4" /> Branding</p>
+                        <p className="flex items-center gap-1"><ChartNoAxesCombined className="h-4 w-4" /> Conversion</p>
+                        <p className="flex items-center gap-1"><Zap className="h-4 w-4" /> Automation</p>
+                        <p className="flex items-center gap-1"><HeartHandshake className="h-4 w-4" /> Trust</p>
                     </div>
 
                     {/* Highlight Box Container (for scroll tracking) */}
                     <div
                         ref={containerRef}
-                        className="mt-20 flex flex-col md:flex-row items-start gap-10 relative"
+                        className="mt-16 md:mt-20 flex flex-col md:flex-row items-start gap-10 relative"
                     >
                         {/* Sticky Left Column (Text) */}
                         <div
                             ref={leftRef}
-                            className="w-full md:w-1/2 flex flex-col gap-4 md:gap-6 pt-6 md:pt-10 sticky top-24"
+                            className="w-full md:w-1/2 flex flex-col gap-4 md:gap-6 pt-0 md:pt-10 sticky top-24"
                             style={{ height: 'fit-content', zIndex: 20 }}
                         >
                             <p className="px-3 py-1 bg-[#131D1D] text-[#5B9983] text-xs rounded-full w-fit">
@@ -199,10 +199,10 @@ export default function Services() {
                                     animate="animate"
                                     exit="exit"
                                 >
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white">
+                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
                                         {safeCurrentItem.h2}
                                     </h2>
-                                    <p className="text-sm md:text-sm text-zinc-400 leading-relaxed mt-2">
+                                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed mt-2">
                                         {safeCurrentItem.p}
                                     </p>
                                 </motion.div>
@@ -249,16 +249,16 @@ export default function Services() {
                     </div>
 
                     <div
-                        className="grid grid-cols-1 lg:grid-cols-3 mt-50 gap-4 max-w-7xl mx-auto w-full">
+                        className="grid grid-cols-1 lg:grid-cols-3 mt-32 md:mt-50 gap-4 max-w-7xl mx-auto w-full">
                         <WobbleCard
-                            containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+                            containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[400px] lg:min-h-[500px] lg:min-h-[300px]"
                             className="">
-                            <div className="max-w-xs">
+                            <div className="max-w-xs sm:max-w-sm">
                                 <h2
                                     className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                                     Helping businesses grow, one step at a time.
                                 </h2>
-                                <p className="mt-4 text-left  text-base/6 text-neutral-200">
+                                <p className="mt-4 text-left text-sm md:text-base/6 text-neutral-200">
                                     At The Zeneration Media, we work closely with local brands and real estate businesses to create simple, effective marketing strategies that bring real results.
                                 </p>
                             </div>
@@ -267,24 +267,24 @@ export default function Services() {
                                 width={500}
                                 height={500}
                                 alt="linear demo image"
-                                className="absolute -right-40 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl" />
+                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[20%] grayscale filter -bottom-10 object-contain rounded-2xl" />
                         </WobbleCard>
                         <WobbleCard containerClassName="col-span-1 min-h-[300px]">
                             <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                                 10 Days. No Pressure. Just Results.
                             </h2>
-                            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+                            <p className="mt-4 max-w-[26rem] text-left text-sm md:text-base/6 text-neutral-200">
                                 Try us out. See the difference. Pay only if you're happy.
                             </p>
                         </WobbleCard>
 
                         <WobbleCard
-                            containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
-                            <div className="max-w-sm">
+                            containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[400px] lg:min-h-[500px] xl:min-h-[300px]">
+                            <div className="max-w-sm sm:max-w-md">
                                 <h2 className="max-w-lg md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                                     Let's build something meaningful together.
                                 </h2>
-                                <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+                                <p className="mt-4 max-w-[26rem] text-left text-sm md:text-base/6 text-neutral-200">
                                     Experience how our personalized and performance-driven marketing can truly support your business — no pressure, no commitment. Start with a 10-day free trial, and let's grow at your pace.
                                 </p>
                             </div>
@@ -294,14 +294,14 @@ export default function Services() {
                                 width={500}
                                 height={500}
                                 alt="linear demo image"
-                                className="absolute -right-40 md:-right-[40%] lg:-right-[20%] lg:top-0 top-90 object-contain rounded-2xl" />
+                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[20%] lg:top-0 top-90 object-contain rounded-2xl" />
                         </WobbleCard>
                     </div>
-                    <div className="my-24 w-fit mx-auto text-center">
+                    <div className="my-16 md:my-24 w-fit mx-auto text-center">
                         <Button className="cursor-pointer">
                             Start 10-Day Testing Phase
                         </Button>
-                        <p className="mt-2 text-sm text-neutral-400">
+                        <p className="mt-2 text-xs md:text-sm text-neutral-400">
                             <a
                                 href="tel:+916377581769"
                                 className="relative inline-block text-zinc-300 font-['F3'] after:block after:h-[1px] after:w-0 after:bg-zinc-300 after:transition-all after:duration-300 hover:after:w-full"

@@ -59,22 +59,22 @@ function MainPage() {
                 <title>Zeneration Media - Best Marketing Agency in Kalyan</title>
                 <meta name="description" content="Zeneration Media: Your go-to marketing agency in Kalyan. We provide full funnel marketing services and drive local business leads for small businesses. Achieve transformative results." />
             </Helmet>
-            <section className="relative flex flex-col items-center justify-center w-full mt-20 mb-16 transition-colors duration-300">
+            <section className="relative flex flex-col items-center justify-center w-full mt-20 mb-16 sm:mt-24 md:mt-32 transition-colors duration-300">
                 <h1
                     className="text-center text-zinc-900 dark:text-white transition-colors duration-300"
-                    style={{ fontFamily: 'Gilroy-Black', fontSize: 'clamp(1.5vw,6vw,3.2rem)', lineHeight: 1.08 }}
+                    style={{ fontFamily: 'Gilroy-Black', fontSize: 'clamp(1.5rem, 5vw, 3.8rem)', lineHeight: 1.08 }}
                 >
                     Grow your Business & Revenue
                 </h1>
                 <div
                     className="text-center text-zinc-600 dark:text-white mt-3 transition-colors duration-300"
-                    style={{ fontFamily: 'Gilroy-SemiBold', fontSize: 'clamp(0.9rem,1.2vw,1.5rem)', maxWidth: 800 }}
+                    style={{ fontFamily: 'Gilroy-SemiBold', fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)', maxWidth: 800 }}
                 >
                     From leads to Sales we are here to deliver the transformative Results.
                 </div>
-                <div className="w-full flex justify-center mt-10 mb-8">
+                <div className="w-full flex justify-center mt-8 mb-6 sm:mt-10 sm:mb-8">
                     <div
-                        className="relative w-full max-w-[850px] h-[45vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#f3f3f3] dark:bg-[#181818] shadow-2xl flex flex-col justify-end transition-colors duration-300"
+                        className="relative w-full max-w-[850px] h-[50vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#f3f3f3] dark:bg-[#181818] shadow-2xl flex flex-col justify-end transition-colors duration-300"
                         onMouseEnter={() => !isMobile && setShowControls(true)}
                         onMouseLeave={() => !isMobile && setShowControls(false)}
                         onClick={handleVideoContainerClick}
@@ -94,18 +94,18 @@ function MainPage() {
                                 <div className="absolute bottom-4 left-4 flex items-center gap-2 z-10">
                                     <button
                                         onClick={handleVideoToggle}
-                                        className="bg-transparent cursor-pointer text-white rounded-full px-4 py-2 text-sm font-semibold shadow-lg hover:bg-black/90 transition"
+                                        className="bg-transparent cursor-pointer text-white rounded-full px-3 py-1 text-sm font-semibold shadow-lg hover:bg-black/90 transition sm:px-4 sm:py-2"
                                         style={{ fontFamily: 'Gilroy-SemiBold' }}
                                     >
                                         {videoPlaying ? 'Pause' : 'Play'}
                                     </button>
                                     <button
                                         onClick={handleMuteToggle}
-                                        className="bg-transparent cursor-pointer text-white rounded-full p-2 shadow-lg hover:bg-black/90 transition flex items-center justify-center"
+                                        className="bg-transparent cursor-pointer text-white rounded-full p-1 shadow-lg hover:bg-black/90 transition flex items-center justify-center sm:p-2"
                                         style={{ fontFamily: 'Gilroy-SemiBold' }}
                                         aria-label="Toggle sound"
                                     >
-                                        {videoMuted ? <span role="img" aria-label="Muted"><VolumeOff /></span> : <span role="img" aria-label="Unmuted"><Volume2 /></span>}
+                                        {videoMuted ? <span role="img" aria-label="Muted"><VolumeOff size={18} sm:size={20} /></span> : <span role="img" aria-label="Unmuted"><Volume2 size={18} sm:size={20} /></span>}
                                     </button>
                                 </div>
                                 <input
@@ -115,23 +115,23 @@ function MainPage() {
                                     step={0.1}
                                     value={videoCurrent}
                                     onChange={handleSeek}
-                                    className="absolute bottom-2 left-4 right-4 w-[95%] h-1 accent-[#243eff] bg-white/20 dark:bg-black/20 rounded-lg cursor-pointer z-10"
+                                    className="absolute bottom-2 left-2 right-2 w-[calc(100%-1rem)] h-1 accent-[#243eff] bg-white/20 dark:bg-black/20 rounded-lg cursor-pointer z-10 sm:left-4 sm:right-4 sm:w-[calc(100%-2rem)]"
                                     style={{ accentColor: '#243eff' }}
                                 />
                             </>
                         )}
                     </div>
                 </div>
-                <div className="flex flex-row items-center justify-center gap-2 mt-2 mb-8 flex-wrap">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-2 mb-8 flex-wrap text-center px-4">
                     <span
-                        className="text-zinc-900 dark:text-white transition-colors duration-300"
-                        style={{ fontFamily: 'F3', fontSize: 16 }}
+                        className="text-zinc-900 dark:text-white transition-colors duration-300 text-sm sm:text-base"
+                        style={{ fontFamily: 'F3' }}
                     >
                         We don't create ads,
                     </span>
                     <span
-                        className="text-zinc-700 dark:text-white transition-colors duration-300"
-                        style={{ fontFamily: 'F1', fontSize: 16 }}
+                        className="text-zinc-700 dark:text-white transition-colors duration-300 text-sm sm:text-base"
+                        style={{ fontFamily: 'F1' }}
                     >
                         *we create brands
                     </span>
