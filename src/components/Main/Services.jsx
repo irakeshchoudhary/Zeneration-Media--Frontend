@@ -15,7 +15,11 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import FAQs from "./FAQs";
 import { Helmet } from 'react-helmet-async';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
+// Animation variants
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.77, 0, 0.175, 1] } },
@@ -28,6 +32,7 @@ const textFadeIn = {
     exit: { opacity: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
+// Service highlights data
 const highlightItems = [
     {
         h2: "Full Funnel Performance Marketing Approach",
@@ -77,36 +82,36 @@ export default function Services() {
     const rightRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const currentIndexRef = useRef(0);
-
     const safeCurrentItem = highlightItems[currentIndex] || highlightItems[0] || { h2: '', p: '' };
-
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start center", "end center"],
     });
 
-    // Map scroll progress to the index of the highlight items
     const itemIndex = useTransform(scrollYProgress, [0, 1], [0, highlightItems.length - 1]);
     const [currentItem, setCurrentItem] = useState(highlightItems[0]);
 
-    // Update state when the scroll index changes
     useEffect(() => {
-        const unsubscribe = itemIndex.on("change", (latest) => {
-            const roundedIndex = Math.round(latest);
-            // Ensure index is within bounds
+        const unsubscribe = scrollYProgress.on("change", (latest) => {
+            const itemProgress = latest * highlightItems.length;
+            const roundedIndex = Math.round(itemProgress);
             const safeIndex = Math.max(0, Math.min(roundedIndex, highlightItems.length - 1));
-            setCurrentItem(highlightItems[safeIndex]);
+
+            if (safeIndex !== highlightItems.indexOf(currentItem)) {
+                const newItem = highlightItems[safeIndex];
+                if (newItem !== currentItem) {
+                    setCurrentItem(newItem);
+                }
+            }
         });
+
         return () => unsubscribe();
-    }, [itemIndex, highlightItems]);
+    }, [scrollYProgress, highlightItems, currentItem]);
 
-
-    // Fixed index calculation
     const updateCurrentIndex = useCallback((progress) => {
         if (!highlightItems.length) return;
 
-        // Calculate index with bounds protection
         const newIndex = Math.min(
             Math.floor(progress * highlightItems.length),
             highlightItems.length - 1
@@ -123,6 +128,25 @@ export default function Services() {
         return () => unsubscribe();
     }, [scrollYProgress, updateCurrentIndex]);
 
+    useEffect(() => {
+        let ctx = gsap.context(() => {
+            if (window.innerWidth >= 768) {
+                ScrollTrigger.create({
+                    trigger: containerRef.current,
+                    start: 'top 10%',
+                    end: () => '+=' + (rightRef.current?.scrollHeight || containerRef.current?.scrollHeight || 0),
+                    pin: leftRef.current,
+                    pinSpacing: false,
+                    scrub: true,
+                    anticipatePin: 1,
+                    markers: true
+                });
+            }
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, [containerRef, leftRef, rightRef]);
+
     return (
         <>
             <Helmet>
@@ -133,7 +157,6 @@ export default function Services() {
                 className="relative w-full flex flex-col items-center px-4 pt-32 pb-16 md:pt-48 md:pb-24"
                 style={{ backgroundColor: "#0C1012" }}
             >
-                {/* Background Image (still decorative) */}
                 <img
                     src="/Photos/ServicesBg.png"
                     alt="Services Background"
@@ -141,10 +164,7 @@ export default function Services() {
                     style={{ zIndex: 1 }}
                 />
 
-                {/* Content Wrapper with fixed width/padding */}
                 <div className="relative z-10 w-full md:max-w-[90%] lg:max-w-[80%] xl:max-w-[65%] mx-auto md:px-0 font-['F3']">
-
-                    {/* Title & Subtitle (Animated) */}
                     <motion.h1
                         variants={fadeIn}
                         initial="initial"
@@ -162,12 +182,10 @@ export default function Services() {
                         Every service we offer is focused on one thing — business growth. Whether you want more leads, sales, or visibility — we've got you covered.
                     </motion.p>
 
-                    {/* CTA Button */}
                     <div className="w-full flex justify-left mb-16 md:mb-24">
                         <LeadFormDialog triggerButtonText="Get Free Consultation" buttonClassName="w-44 text-sm font-['Gilroy-SemiBold']" />
                     </div>
 
-                    {/* Benefits Tags */}
                     <div className="mt-8 flex flex-wrap justify-left gap-3 sm:gap-4 text-xs sm:text-sm font-['F3'] text-zinc-300">
                         <p className="flex items-center gap-1"><Ghost className="h-4 w-4" /> Visibility</p>
                         <p className="flex items-center gap-1"><Ribbon className="h-4 w-4" /> Branding</p>
@@ -176,54 +194,73 @@ export default function Services() {
                         <p className="flex items-center gap-1"><HeartHandshake className="h-4 w-4" /> Trust</p>
                     </div>
 
-                    {/* Highlight Box Container (for scroll tracking) */}
                     <div
                         ref={containerRef}
                         className="mt-16 md:mt-20 flex flex-col md:flex-row items-start gap-10 relative"
                     >
-                        {/* Sticky Left Column (Text) */}
-                        <div
-                            ref={leftRef}
-                            className="w-full md:w-1/2 flex flex-col gap-4 md:gap-6 pt-0 md:pt-10 sticky top-24"
-                            style={{ height: 'fit-content', zIndex: 20 }}
-                        >
+                        {/* Mobile View - Simple Linear Layout */}
+                        <div className="md:hidden w-full flex flex-col gap-8">
+                            {highlightItems.map((item, index) => (
+                                <div key={index} className="flex flex-col gap-4">
+                                    <div className="text-left">
+                                        <p className="px-3 py-1 bg-[#131D1D] text-[#5B9983] text-xs rounded-full w-fit">
+                                            The Zeneration Media™
+                                        </p>
+                                        <h2 className="text-xl font-bold text-white mt-2">
+                                            {item.h2}
+                                        </h2>
+                                        <p className="text-sm text-zinc-400 leading-relaxed mt-2">
+                                            {item.p}
+                                        </p>
+                                    </div>
+                                    <div className="flex justify-center w-full">
+                                        <img
+                                            className="w-full max-w-xs object-cover rounded-xl"
+                                            src={item.img}
+                                            alt={item.h2}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Desktop View - Animated Scroll Layout */}
+                        <div ref={leftRef} className="hidden md:flex w-full md:w-1/2 flex-col gap-4 md:gap-6 pt-6 md:pt-10 md:self-start" style={{ zIndex: 2 }}>
                             <p className="px-3 py-1 bg-[#131D1D] text-[#5B9983] text-xs rounded-full w-fit">
                                 The Zeneration Media™
                             </p>
-
                             <AnimatePresence mode="wait">
                                 <motion.div
-                                    key={safeCurrentItem.h2}
+                                    key={currentItem.h2}
                                     variants={textFadeIn}
                                     initial="initial"
                                     animate="animate"
                                     exit="exit"
                                 >
-                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
-                                        {safeCurrentItem.h2}
+                                    <h2 className="text-xl md:text-4xl font-bold text-white">
+                                        {currentItem.h2}
                                     </h2>
-                                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed mt-2">
-                                        {safeCurrentItem.p}
+                                    <p className="text-xs md:text-sm text-zinc-400 leading-relaxed mt-2">
+                                        {currentItem.p}
                                     </p>
                                 </motion.div>
                             </AnimatePresence>
                         </div>
 
-                        {/* Scrollable Right Column (Images) */}
-                        <div className="w-full md:w-1/2 flex flex-col gap-4" style={{ height: `${highlightItems.length * 60}vh` }}>
+                        <div className="hidden md:flex w-full md:w-1/2 flex-col gap-4" style={{ height: `${highlightItems.length * 60}vh` }}>
                             {highlightItems.map((item, index) => {
                                 const isLastItem = index === highlightItems.length - 1;
 
                                 const itemY = useTransform(
                                     itemIndex,
-                                    [index - 1, index, isLastItem ? highlightItems.length : index + 1], // Input range
-                                    [-50, 0, isLastItem ? 0 : 50] // Output range: if last item, output is 0 from index onwards
+                                    [index - 1, index, isLastItem ? highlightItems.length : index + 1],
+                                    [-50, 0, isLastItem ? 0 : 50]
                                 );
 
                                 const itemOpacity = useTransform(
                                     itemIndex,
-                                    [index - 0.5, index, isLastItem ? highlightItems.length : index + 0.5], // Input range
-                                    [0, 1, isLastItem ? 1 : 0] // Output range: if last item, output is 1 from index onwards
+                                    [index - 0.5, index, isLastItem ? highlightItems.length : index + 0.5],
+                                    [0, 1, isLastItem ? 1 : 0]
                                 );
 
                                 return (
@@ -248,14 +285,12 @@ export default function Services() {
                         </div>
                     </div>
 
-                    <div
-                        className="grid grid-cols-1 lg:grid-cols-3 mt-32 md:mt-50 gap-4 max-w-7xl mx-auto w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 mt-32 md:mt-50 gap-4 max-w-7xl mx-auto w-full">
                         <WobbleCard
                             containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[400px] lg:min-h-[500px] lg:min-h-[300px]"
                             className="">
                             <div className="max-w-xs sm:max-w-sm">
-                                <h2
-                                    className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                                <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                                     Helping businesses grow, one step at a time.
                                 </h2>
                                 <p className="mt-4 text-left text-sm md:text-base/6 text-neutral-200">
@@ -298,9 +333,10 @@ export default function Services() {
                         </WobbleCard>
                     </div>
                     <div className="my-16 md:my-24 w-fit mx-auto text-center">
-                        <Button className="cursor-pointer">
-                            Start 10-Day Testing Phase
-                        </Button>
+                        <LeadFormDialog
+                            triggerButtonText="Start 10-Day Testing Phase"
+                            buttonClassName="cursor-pointer"
+                        />
                         <p className="mt-2 text-xs md:text-sm text-neutral-400">
                             <a
                                 href="tel:+916377581769"
