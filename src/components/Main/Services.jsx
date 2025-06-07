@@ -139,7 +139,7 @@ export default function Services() {
                     pinSpacing: false,
                     scrub: true,
                     anticipatePin: 1,
-                    markers: true
+                    // markers: true
                 });
             }
         }, containerRef);
@@ -335,7 +335,7 @@ export default function Services() {
                     <div className="my-16 md:my-24 w-fit mx-auto text-center">
                         <LeadFormDialog
                             triggerButtonText="Start 10-Day Testing Phase"
-                            buttonClassName="cursor-pointer"
+                            buttonClassName="cursor-pointer text-left"
                         />
                         <p className="mt-2 text-xs md:text-sm text-neutral-400">
                             <a

@@ -135,7 +135,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                             <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-2 px-4 pb-4 pt-2 sm:px-6 sm:pb-6">
                                 {/* Name */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="name" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">Your Name</label>
+                                    <label htmlFor="name" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Your Name</label>
                                     <input
                                         id="name"
                                         name="name"
@@ -145,11 +145,11 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.name ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.name && <span className="text-xs text-red-500 mt-1">{fieldErrors.name}</span>}
+                                    {fieldErrors.name && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.name}</span>}
                                 </div>
                                 {/* Business Name */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="business" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">Business / Brand Name</label>
+                                    <label htmlFor="business" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Business / Brand Name</label>
                                     <input
                                         id="business"
                                         name="business"
@@ -159,11 +159,11 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.business ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.business && <span className="text-xs text-red-500 mt-1">{fieldErrors.business}</span>}
+                                    {fieldErrors.business && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.business}</span>}
                                 </div>
                                 {/* Contact Number */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="phone" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">Mobile Number</label>
+                                    <label htmlFor="phone" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Mobile Number</label>
                                     <input
                                         id="phone"
                                         name="phone"
@@ -173,11 +173,11 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.phone ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.phone && <span className="text-xs text-red-500 mt-1">{fieldErrors.phone}</span>}
+                                    {fieldErrors.phone && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.phone}</span>}
                                 </div>
                                 {/* Email ID */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="email" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">Email Address</label>
+                                    <label htmlFor="email" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Email Address</label>
                                     <input
                                         id="email"
                                         name="email"
@@ -187,11 +187,11 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.email ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.email && <span className="text-xs text-red-500 mt-1">{fieldErrors.email}</span>}
+                                    {fieldErrors.email && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.email}</span>}
                                 </div>
                                 {/* Brief Business Goal or Website */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="goal" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300">
+                                    <label htmlFor="goal" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">
                                         What's your goal or business website? <span className="text-[10px] text-zinc-400">(optional)</span>
                                     </label>
                                     <input
