@@ -5,6 +5,7 @@ import Navbar from "./components/Common/Navbar";
 import Preloader from "./components/Common/Preloader";
 import GrainyFilter from "./components/Common/GrainyFilter";
 import Footer from "./components/Main/Footer";
+import FeedBack from "./components/Common/FeedBack";
 import { AnimatePresence, motion } from "framer-motion";
 
 // Lazy load pages
@@ -15,6 +16,7 @@ const FAQs = lazy(() => import("./components/Main/FAQs"));
 const About = lazy(() => import("./components/Main/About"));
 const Contact = lazy(() => import("./components/Main/Contact"));
 const WhyZenmedia = lazy(() => import("./components/Main/WhyZenmedia"));
+const FeedbackPage = lazy(() => import("./components/Main/FeedbackPage"));
 
 const pageTransition = {
   initial: { opacity: 0, y: 40 },
@@ -60,7 +62,9 @@ const App = () => {
           <GrainyFilter />
         </div>
       )}
-      {/* WhatsApp floating icon - z-50 */}
+      {/* Feedback Button - z-50 */}
+      <FeedBack />
+      {/* WhatsApp floating icon - z-60 */}
       <a
         href="https://wa.link/suk1hv"
         target="_blank"
@@ -180,6 +184,17 @@ const App = () => {
                   <div className="pt-24 px-4">
                     <Contact />
                   </div>
+                  <Footer />
+                </motion.div>
+              }
+            />
+            {/* Feedback Route */}
+            <Route
+              path="/feedback"
+              element={
+                <motion.div {...pageTransition}>
+                  <Navbar />
+                  <FeedbackPage />
                   <Footer />
                 </motion.div>
               }

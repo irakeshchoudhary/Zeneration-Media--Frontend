@@ -59,22 +59,22 @@ function MainPage() {
                 <title>Zeneration Media - Best Marketing Agency in Kalyan</title>
                 <meta name="description" content="Zeneration Media: Your go-to marketing agency in Kalyan. We provide full funnel marketing services and drive local business leads for small businesses. Achieve transformative results." />
             </Helmet>
-            <section className="relative flex flex-col items-center justify-center w-full mt-20 mb-16 sm:mt-24 md:mt-32 transition-colors duration-300">
+            <section className="relative flex flex-col items-center justify-center w-full mt-20 mb-16 sm:mt-24 md:mt-32">
                 <h1
-                    className="text-center text-zinc-900 dark:text-white transition-colors duration-300"
+                    className="text-center text-white text-nowrap"
                     style={{ fontFamily: 'Gilroy-Black', fontSize: 'clamp(1.5rem, 5vw, 3.8rem)', lineHeight: 1.08 }}
                 >
                     Grow your Business & Revenue
                 </h1>
                 <div
-                    className="text-center text-zinc-600 dark:text-white mt-3 transition-colors duration-300"
+                    className="text-center text-white mt-3"
                     style={{ fontFamily: 'Gilroy-SemiBold', fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)', maxWidth: 800 }}
                 >
                     From leads to Sales we are here to deliver the transformative Results.
                 </div>
                 <div className="w-full flex justify-center mt-8 mb-6 sm:mt-10 sm:mb-8">
                     <div
-                        className="relative w-full max-w-[850px] h-[50vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#f3f3f3] dark:bg-[#181818] shadow-2xl flex flex-col justify-end transition-colors duration-300"
+                        className="relative w-full max-w-[850px] h-[50vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#181818] shadow-2xl flex flex-col justify-end"
                         onMouseEnter={() => !isMobile && setShowControls(true)}
                         onMouseLeave={() => !isMobile && setShowControls(false)}
                         onClick={handleVideoContainerClick}
@@ -115,22 +115,22 @@ function MainPage() {
                                     step={0.1}
                                     value={videoCurrent}
                                     onChange={handleSeek}
-                                    className="absolute bottom-2 left-2 right-2 w-[calc(100%-1rem)] h-1 accent-[#243eff] bg-white/20 dark:bg-black/20 rounded-lg cursor-pointer z-10 sm:left-4 sm:right-4 sm:w-[calc(100%-2rem)]"
+                                    className="absolute bottom-2 left-2 right-2 w-[calc(100%-1rem)] h-1 accent-[#243eff] bg-black/20 rounded-lg cursor-pointer z-10 sm:left-4 sm:right-4 sm:w-[calc(100%-2rem)]"
                                     style={{ accentColor: '#243eff' }}
                                 />
                             </>
                         )}
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-2 mb-8 flex-wrap text-center px-4">
+                <div className="flex flex-row items-center justify-center gap-2 mt-2 mb-8 text-center px-4">
                     <span
-                        className="text-zinc-900 dark:text-white transition-colors duration-300 text-sm sm:text-base"
+                        className="text-white text-sm sm:text-base whitespace-nowrap"
                         style={{ fontFamily: 'F3' }}
                     >
                         We don't create ads,
                     </span>
                     <span
-                        className="text-zinc-700 dark:text-white transition-colors duration-300 text-sm sm:text-base"
+                        className="text-white text-sm sm:text-base whitespace-nowrap"
                         style={{ fontFamily: 'F1' }}
                     >
                         *we create brands

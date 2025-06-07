@@ -66,7 +66,7 @@ const Preloader = ({ onFinish }) => {
     <>
       <div
         ref={blueScreenRef}
-        className="fixed overflow-hidden top-0 left-0 w-screen h-screen bg-white z-[9998]"
+        className="fixed overflow-hidden top-0 left-0 w-screen h-screen bg-black z-[9998]"
         style={{ display: 'none' }}
       />
       <div
@@ -103,7 +103,6 @@ const Preloader = ({ onFinish }) => {
               ref={dotcomRef}
               className="text-white font-[Gilroy-Medium] text-[1.7vw] mb-[0.4vw] sm:text-[1vw]"
             >
-
             </span>
           </span>
         </div>

@@ -43,7 +43,6 @@ const About = () => {
         }
     };
 
-
     return (
         <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
             <Helmet>
@@ -135,28 +134,28 @@ const About = () => {
                             className="fixed inset-0 bg-black/50 bg-opacity-90 backdrop-blur-xs"
                         />
                         <motion.div
-                            className="relative bg-white dark:bg-zinc-950 rounded-xl shadow-2xl p-8 max-w-xs w-full flex flex-col items-center z-10"
+                            className="relative bg-zinc-950 rounded-xl shadow-2xl p-8 max-w-xs w-full flex flex-col items-center z-10"
                             initial={{ scale: 0.92, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.92, opacity: 0 }}
                             transition={{ duration: 0.22 }}
                         >
                             <button
-                                className="absolute top-2 right-2 cursor-pointer text-zinc-400 hover:text-zinc-700 dark:hover:text-white text-xl font-bold focus:outline-none"
+                                className="absolute top-2 right-2 cursor-pointer text-zinc-400 hover:text-white text-xl font-bold focus:outline-none"
                                 onClick={() => setShowCard(false)}
                                 aria-label="Close"
                             >
                                 ×
                             </button>
-                            <div className="text-md font-['F3'] text-zinc-900 dark:text-white mb-2 text-center">Currently no vacancy is available</div>
-                            <div className="text-xs text-zinc-400 dark:text-zinc-300 mb-4 text-center">Subscribe to get notified when we are hiring. We'll email you as soon as a vacancy opens up!</div>
+                            <div className="text-md font-['F3'] text-white mb-2 text-center">Currently no vacancy is available</div>
+                            <div className="text-xs text-zinc-400 mb-4 text-center">Subscribe to get notified when we are hiring. We'll email you as soon as a vacancy opens up!</div>
                             <form onSubmit={handleSubscribe} className="w-full flex flex-col gap-2 items-center">
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
                                     placeholder="Your email address"
-                                    className="w-full px-3 py-2 rounded placeholder:text-xs placeholder:font-['F3'] focus:outline-none text-sm bg-zinc-900"
+                                    className="w-full px-3 py-2 rounded placeholder:text-xs placeholder:font-['F3'] focus:outline-none text-sm bg-zinc-900 text-white"
                                 />
                                 {error && <div className="text-xs text-red-500 text-center">{error}</div>}
 

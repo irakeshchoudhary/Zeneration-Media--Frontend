@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import AppleCardsCarousel from '../Common/AppleCardsCarousel';
 
 const clients = [
     {
@@ -39,6 +40,53 @@ const clients = [
     },
 ];
 
+const clientDetails = [
+    {
+        title: "Digital Transformation Success",
+        subtitle: "How we helped a traditional business go digital",
+        description: "We transformed their online presence with a modern website, social media strategy, and digital marketing campaigns. The result? A 300% increase in online leads and 150% growth in social media engagement.",
+        image: "/Photos/Thumbnail1.jpg",
+        stats: [
+            { label: "Increase in Online Leads", value: "300%" },
+            { label: "Social Media Growth", value: "150%" },
+            { label: "Customer Engagement", value: "200%" }
+        ]
+    },
+    {
+        title: "E-commerce Revolution",
+        subtitle: "Building a successful online store",
+        description: "Our comprehensive e-commerce solution helped them launch their online store with seamless payment integration, inventory management, and marketing automation. The store now generates 40% of their total revenue.",
+        image: "/Photos/Thumbnail2.jpg",
+        stats: [
+            { label: "Revenue from Online Store", value: "40%" },
+            { label: "Customer Retention", value: "85%" },
+            { label: "Average Order Value", value: "₹2,500" }
+        ]
+    },
+    {
+        title: "Brand Identity Makeover",
+        subtitle: "Creating a memorable brand presence",
+        description: "We redesigned their brand identity, including logo, color scheme, and marketing materials. The new brand identity helped them stand out in a crowded market and increased brand recognition by 200%.",
+        image: "/Photos/Thumbnail3.jpg",
+        stats: [
+            { label: "Brand Recognition", value: "200%" },
+            { label: "Market Share Growth", value: "45%" },
+            { label: "Customer Loyalty", value: "90%" }
+        ]
+    },
+    {
+        title: "Social Media Dominance",
+        subtitle: "Mastering the digital landscape",
+        description: "Our social media strategy helped them build a strong online community and engage with their audience effectively. They now have over 100K followers and generate 500+ leads monthly through social media.",
+        image: "/Photos/Thumbnail4.jpg",
+        stats: [
+            { label: "Social Media Followers", value: "100K+" },
+            { label: "Monthly Leads", value: "500+" },
+            { label: "Engagement Rate", value: "8.5%" }
+        ]
+    }
+];
+
 const BORDER_COLORS = [
     'border-red-400',
     'border-blue-400',
@@ -59,6 +107,7 @@ const Clients = () => {
     const [centerIdx, setCenterIdx] = useState(0);
     const [currentX, setCurrentX] = useState(0);
     const [loopWidth, setLoopWidth] = useState(0); // State to store the dynamic loop width
+    const [showDetails, setShowDetails] = useState(false);
 
     useEffect(() => {
         document.title = "Zeneration Media | Clients";
@@ -222,109 +271,103 @@ const Clients = () => {
     const borderColor = BORDER_COLORS[centerIdx % BORDER_COLORS.length];
 
     return (
-        <section className="relative min-h-[600px] flex flex-col items-center justify-center px-4 py-20 overflow-x-hidden">
+        <section className="relative min-h-[1200px] flex flex-col items-center justify-center px-4 py-12">
             <Helmet>
                 <title>Client Success Stories | Zeneration Media Kalyan</title>
                 <meta name="description" content="See how Zeneration Media, the best marketing agency in Kalyan, helped clients achieve remarkable growth. Real success stories from a top ad agency." />
             </Helmet>
-            <div className="mb-2 text-xs tracking-widest text-zinc-400 bg-[#1a2321] px-3 py-1 rounded-full font-['F3']">SUCCESS STORIES</div>
-            <h2 className="md:text-5xl text-4xl text-nowrap font-['F3'] text-white text-center mb-2">Our Trusted Clients</h2>
-            <p className="text-zinc-400 text-center text-sm md:max-w-2xl mx-auto mb-12 font-['F3'] md:text-base">
+            <div className="mb-2 text-xs tracking-widest text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full">SUCCESS STORIES</div>
+            <h2 className="md:text-3xl text-2xl text-nowrap text-white text-center mb-2">Our Trusted Clients</h2>
+            <p className="text-zinc-400 text-center text-sm md:max-w-xl mx-auto mb-8 md:text-sm">
                 We've helped brands grow, convert, and thrive.<br />
-                From local businesses to growing startups — here are some of our success stories and the amazing clients who trust Zeneration Media to fuel their growth journey.
+                From local businesses to growing startups — here are some of our success stories.
             </p>
-            <div className="relative w-full flex items-center justify-center mt-4" style={{ height: 350 }}>
-                {/* Left Blur - Adjust visibility or size for mobile */}
-                {/* Adjusted blur width and position for better responsiveness */}
+            <div className="relative w-full max-w-5xl flex items-center justify-center mt-4" style={{ height: 800 }}>
+                {/* Left Blur */}
                 <div className="absolute left-0 w-1/4 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} />
-                {/* Right Blur - Adjust visibility or size for mobile */}
-                {/* Adjusted blur width and position for better responsiveness */}
+                {/* Right Blur */}
                 <div className="absolute right-0 w-1/4 md:w-32 top-0 h-full z-30 pointer-events-none" style={{ filter: 'blur(18px)', background: 'linear-gradient(to left, rgba(0,0,0,0.9), rgba(0,0,0,0))' }} />
 
                 <div
-                    className="relative flex items-center justify-center w-full max-w-7xl overflow-hidden z-20"
+                    className="relative flex items-center justify-center w-full z-20"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
                     <motion.div
                         ref={containerRef}
-                        // Use responsive gap and flexible width for cards
                         className="flex gap-4 md:gap-8 items-center flex-nowrap"
                         animate={controls}
                         initial={{ x: 0 }}
-                        style={{ minWidth: containerWidth }} // Use dynamically calculated containerWidth
-                        onUpdate={(latest) => setCurrentX(latest.x)} // Update currentX during animation
+                        style={{ minWidth: containerWidth }}
+                        onUpdate={(latest) => setCurrentX(latest.x)}
                     >
-                        {Array(REPEAT).fill(0).flatMap((_, repIdx) =>
-                            clients.map((client, idx) => {
-                                const isCenter = (repIdx * clients.length + idx) === centerIdx;
-                                const isHovered = hovered === repIdx * clients.length + idx;
-                                return (
-                                    <motion.div
-                                        key={`${repIdx}-${idx}`}
-                                        // Assign ref to the first card to measure
-                                        ref={repIdx === 0 && idx === 0 ? cardRef : null}
-                                        // Use responsive width for cards
-                                        className={`relative flex flex-col justify-between items-start bg-[#181c1b] rounded-xl shadow-lg transition-all ease-in duration-300 ${isCenter ? borderColor + ' scale-100 border-[0.01px] z-10' : 'border-transparent scale-90 border-[0.01px] z-0'} w-[85vw] max-w-[420px] h-[340px] p-0 cursor-pointer overflow-hidden flex-shrink-0`}
-                                        style={{ fontFamily: 'F3', height: 340 }} // Keep height fixed or make responsive if needed
-                                        onMouseEnter={() => setHovered(repIdx * clients.length + idx)}
-                                        onMouseLeave={() => setHovered(null)}
-                                    >
-                                        {/* Video/Thumbnail fills card */}
-                                        <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden">
-                                            <img
-                                                src={client.thumbnail}
-                                                alt={client.title}
-                                                className={`w-full h-full object-cover transition-all duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-                                                draggable={false}
-                                            />
-                                            {isHovered && (
-                                                <video
-                                                    src={client.video}
-                                                    className="absolute inset-0 w-full h-full object-cover"
-                                                    autoPlay
-                                                    muted
-                                                    loop
-                                                    playsInline
-                                                />
-                                            )}
-                                        </div>
-                                        {/* Content appears on hover */}
-                                        <AnimatePresence>
-                                            {isHovered && (
-                                                <motion.div
-                                                    className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20"
-                                                    initial={{ opacity: 0, y: 30 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: 30 }}
-                                                    transition={{ duration: 0.3 }}
-                                                >
-                                                    <div className="flex-1 w-full">
-                                                        <div className="flex items-center gap-2 mb-2">
-                                                            <span className="font-bold text-white text-base">{client.title}</span>
-                                                        </div>
-                                                        <div className="text-xs text-white mb-2">{client.subtitle}</div>
-                                                    </div>
-                                                    <div className="flex items-center justify-between w-full mt-4">
-                                                        <span className="text-xs text-white/80 font-semibold">{client.author}</span>
-                                                        <div className="flex gap-2">
-                                                            {client.tags.map((tag, i) => (
-                                                                <span key={i} className="bg-zinc-800 text-zinc-200 text-xs px-2 py-1 rounded font-mono tracking-wide">
-                                                                    {tag}
-                                                                </span>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.div>
-                                );
-                            })
-                        )}
+                        <AppleCardsCarousel />
                     </motion.div>
                 </div>
             </div>
+
+            {/* View More Details Button */}
+            <motion.button
+                onClick={() => setShowDetails(!showDetails)}
+                className="mt-8 px-5 py-2 bg-zinc-900 text-white rounded-full flex items-center gap-2 hover:bg-zinc-800 transition-all duration-300 text-sm"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                {showDetails ? "Hide Details" : "View More Details"}
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${showDetails ? 'rotate-180' : ''}`} />
+            </motion.button>
+
+            {/* Client Details Section */}
+            <AnimatePresence>
+                {showDetails && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="w-full max-w-5xl mx-auto mt-12 space-y-12"
+                    >
+                        {clientDetails.map((detail, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.2 }}
+                                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 items-center bg-zinc-900/50 p-6 rounded-xl backdrop-blur-sm`}
+                            >
+                                {/* Image Section */}
+                                <div className="w-full md:w-1/2">
+                                    <motion.img
+                                        src={detail.image}
+                                        alt={detail.title}
+                                        className="w-full h-[300px] object-cover rounded-lg shadow-lg"
+                                        whileHover={{ scale: 1.01 }}
+                                        transition={{ duration: 0.3 }}
+                                    />
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="w-full md:w-1/2 space-y-4">
+                                    <div>
+                                        <h3 className="text-xl font-medium text-white mb-1">{detail.title}</h3>
+                                        <p className="text-sm text-zinc-400 mb-3">{detail.subtitle}</p>
+                                        <p className="text-sm text-zinc-500">{detail.description}</p>
+                                    </div>
+
+                                    {/* Stats Grid */}
+                                    <div className="grid grid-cols-3 gap-3">
+                                        {detail.stats.map((stat, i) => (
+                                            <div key={i} className="bg-zinc-800/50 p-3 rounded-lg">
+                                                <p className="text-lg font-medium text-white">{stat.value}</p>
+                                                <p className="text-xs text-zinc-500">{stat.label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };

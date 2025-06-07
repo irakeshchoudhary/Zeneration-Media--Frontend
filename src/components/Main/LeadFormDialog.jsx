@@ -77,7 +77,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
     return (
         <>
             <Button
-                className={buttonClassName + " cursor-pointer transition-all ease-in-out duration-200"}
+                className={buttonClassName + " bg-white text-black hover:bg-zinc-200 cursor-pointer transition-all ease-in-out duration-200"}
                 style={{ fontFamily: 'Gilroy-Bold' }}
                 onClick={() => setOpen(true)}
             >
@@ -97,15 +97,15 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                     >
                         <div className="fixed inset-0 bg-black/60" />
                         <motion.div
-                            className="flex flex-col items-center justify-center bg-white dark:bg-[#181818] max-w-[300px] sm:max-w-[350px] rounded-xl shadow-xl p-6 sm:p-8 z-[101]"
+                            className="flex flex-col items-center justify-center bg-[#181818] max-w-[300px] sm:max-w-[350px] rounded-xl shadow-xl p-6 sm:p-8 z-[101]"
                             initial="hidden"
                             animate="visible"
                             exit="exit"
                             variants={dialogVariants}
                         >
                             <PartyEffect />
-                            <div className="text-center mt-2 text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white" style={{ fontFamily: 'Gilroy-SemiBold' }}>Thank you!</div>
-                            <div className="text-center mt-2 text-sm text-zinc-600 dark:text-white">Our team will contact you soon.</div>
+                            <div className="text-center mt-2 text-xl sm:text-2xl font-bold text-white" style={{ fontFamily: 'Gilroy-SemiBold' }}>Thank you!</div>
+                            <div className="text-center mt-2 text-sm text-white">Our team will contact you soon.</div>
                         </motion.div>
                     </motion.div>
                 )}
@@ -120,78 +120,77 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                         exit="exit"
                         variants={dialogVariants}
                     >
-
                         <div className="fixed inset-0" style={{ pointerEvents: 'none' }} />
                         <motion.div
-                            className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-zinc-950 rounded-xl shadow-xl px-4 py-1 z-[101]"
+                            className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-zinc-950 rounded-xl shadow-xl px-4 py-1 z-[101]"
                             initial="hidden"
                             animate="visible"
                             exit="exit"
                             variants={dialogVariants}
                         >
-                            <div className="mb-2 text-zinc-900 text-center mt-4 dark:text-white text-md sm:text-lg font-bold" style={{ fontFamily: 'Gilroy-SemiBold' }}>
+                            <div className="mb-2 text-white text-center mt-4 text-md sm:text-lg font-bold" style={{ fontFamily: 'Gilroy-SemiBold' }}>
                                 We're here to answer any question you may have.
                             </div>
                             <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-2 px-4 pb-4 pt-2 sm:px-6 sm:pb-6">
                                 {/* Name */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="name" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Your Name</label>
+                                    <label htmlFor="name" className="text-xs font-['F3'] text-zinc-300">Your Name</label>
                                     <input
                                         id="name"
                                         name="name"
                                         type="text"
                                         value={form.name}
                                         onChange={handleInputChange}
-                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.name ? 'border border-red-500' : ''}`}
+                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-white focus:outline-none ${fieldErrors.name ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.name && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.name}</span>}
+                                    {fieldErrors.name && <span className="text-xs text-red-500 mt-1">{fieldErrors.name}</span>}
                                 </div>
                                 {/* Business Name */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="business" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Business / Brand Name</label>
+                                    <label htmlFor="business" className="text-xs font-['F3'] text-zinc-300">Business / Brand Name</label>
                                     <input
                                         id="business"
                                         name="business"
                                         type="text"
                                         value={form.business}
                                         onChange={handleInputChange}
-                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.business ? 'border border-red-500' : ''}`}
+                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-white focus:outline-none ${fieldErrors.business ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.business && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.business}</span>}
+                                    {fieldErrors.business && <span className="text-xs text-red-500 mt-1">{fieldErrors.business}</span>}
                                 </div>
                                 {/* Contact Number */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="phone" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Mobile Number</label>
+                                    <label htmlFor="phone" className="text-xs font-['F3'] text-zinc-300">Mobile Number</label>
                                     <input
                                         id="phone"
                                         name="phone"
                                         type="tel"
                                         value={form.phone}
                                         onChange={handleInputChange}
-                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.phone ? 'border border-red-500' : ''}`}
+                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-white focus:outline-none ${fieldErrors.phone ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.phone && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.phone}</span>}
+                                    {fieldErrors.phone && <span className="text-xs text-red-500 mt-1">{fieldErrors.phone}</span>}
                                 </div>
                                 {/* Email ID */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="email" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">Email Address</label>
+                                    <label htmlFor="email" className="text-xs font-['F3'] text-zinc-300">Email Address</label>
                                     <input
                                         id="email"
                                         name="email"
                                         type="email"
                                         value={form.email}
                                         onChange={handleInputChange}
-                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none ${fieldErrors.email ? 'border border-red-500' : ''}`}
+                                        className={`rounded px-3 py-2 text-sm bg-zinc-900 text-white focus:outline-none ${fieldErrors.email ? 'border border-red-500' : ''}`}
                                         required
                                     />
-                                    {fieldErrors.email && <span className="text-xs text-red-500 mt-1 text-left">{fieldErrors.email}</span>}
+                                    {fieldErrors.email && <span className="text-xs text-red-500 mt-1">{fieldErrors.email}</span>}
                                 </div>
                                 {/* Brief Business Goal or Website */}
                                 <div className="flex flex-col gap-1">
-                                    <label htmlFor="goal" className="text-xs font-['F3'] text-zinc-500 dark:text-zinc-300 text-left">
+                                    <label htmlFor="goal" className="text-xs font-['F3'] text-zinc-300">
                                         What's your goal or business website? <span className="text-[10px] text-zinc-400">(optional)</span>
                                     </label>
                                     <input
@@ -200,19 +199,23 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         type="text"
                                         value={form.goal}
                                         onChange={handleInputChange}
-                                        className="rounded px-3 py-2 text-sm bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none"
+                                        className="rounded px-3 py-2 text-sm bg-zinc-900 text-white focus:outline-none"
                                     />
                                 </div>
                                 {/* Error message (global) */}
                                 {error && <div className="text-red-500 text-sm mt-2 text-center">{error}</div>}
                                 {/* Buttons */}
                                 <div className="flex w-full justify-between mt-2 gap-2">
-                                    <Button type="button" variant="outline" className="cursor-pointer text-zinc-900 dark:text-white" onClick={() => setOpen(false)}>
+                                    <Button
+                                        type="button"
+                                        className="bg-zinc-800 text-white hover:bg-zinc-700 cursor-pointer"
+                                        onClick={() => setOpen(false)}
+                                    >
                                         Cancel
                                     </Button>
                                     <Button
                                         type="submit"
-                                        className="bg-[#243eff] text-white dark:bg-white cursor-pointer dark:text-black hover:bg-[#1833ff] dark:hover:bg-zinc-200"
+                                        className="bg-white text-black hover:bg-zinc-200"
                                         disabled={loading}
                                     >
                                         {loading ? <Loader2 className="animate-spin mr-2" size={16} /> : 'Submit'}
