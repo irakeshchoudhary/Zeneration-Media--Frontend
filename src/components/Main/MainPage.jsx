@@ -15,6 +15,7 @@ function MainPage() {
     const [activeVideoSrc, setActiveVideoSrc] = useState(null);
     const [showLanguageSelectionDialog, setShowLanguageSelectionDialog] = useState(false);
     const [currentVideoLanguage, setCurrentVideoLanguage] = useState(null);
+    const [touchTimeout, setTouchTimeout] = useState(null);
 
     const videoRef = useRef(null);
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -80,6 +81,7 @@ function MainPage() {
             setActiveVideoSrc(selectedPath);
             setCurrentVideoLanguage(language);
             setShowLanguageSelectionDialog(false);
+            setVideoMuted(false); // Set video to unmuted
             setIsPlaying(true); // Automatically play after selection
         }
     };
@@ -109,6 +111,21 @@ function MainPage() {
         }
     }, [activeVideoSrc, isPlaying]);
 
+    // Add touch event handlers
+    const handleTouchStart = () => {
+        if (touchTimeout) {
+            clearTimeout(touchTimeout);
+        }
+        setShowControls(true);
+    };
+
+    const handleTouchEnd = () => {
+        const timeout = setTimeout(() => {
+            setShowControls(false);
+        }, 3000);
+        setTouchTimeout(timeout);
+    };
+
     // --- Main Render ---
     return (
         <>
@@ -134,6 +151,8 @@ function MainPage() {
                         className="relative w-full max-w-[850px] h-[50vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#181818] shadow-2xl flex flex-col justify-end"
                         onMouseEnter={() => !isMobile && setShowControls(true)}
                         onMouseLeave={() => !isMobile && setShowControls(false)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         {!activeVideoSrc ? (
                             // Thumbnail and Play Button
