@@ -97,7 +97,7 @@ const Footer = () => {
                         </div>
                         {/* SITE & SOCIAL for mobile below logo, for desktop on right */}
                         <div className='flex md:flex-row items-center md:items-start gap-6 md:gap-18 w-full md:w-auto mt-6 md:mt-0'>
-                            <div className='flex flex-col justify-center gap-1 items-left text-white md:items-start'>
+                            <div className='flex flex-col justify-center gap-1 mt-6 items-left text-white md:items-start'>
                                 <h4 className='text-sm font-["Gilroy-SemiBold"] text-white mb-2'>SITE</h4>
                                 <Link to="/services" className='text-xs font-["F3"] cursor-pointer text-white hover:text-zinc-400 transition-all ease-in-out duration-300'>Services</Link>
                                 <Link to="/contact" className='text-xs font-["F3"] cursor-pointer text-white text-nowrap hover:text-zinc-400 transition-all ease-in-out duration-300'>Contact Us</Link>
