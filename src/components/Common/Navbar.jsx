@@ -82,14 +82,16 @@ const Navbar = () => {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  align="center"
+                  align="start"
                   sideOffset={8}
-                  className="w-[calc(100vw-32px)] max-w-[750px] border-none px-2 py-1 bg-black text-white backdrop-blur-[5px]"
+                  alignOffset={16}
+                  className="w-full mt-2 max-w-[750px] border-none px-2 py-1 bg-black text-white backdrop-blur-[5px] md:hidden"
                 >
                   <DropdownMenuItem onClick={() => { setMenuOpen(false); navigate('/services'); }} className="text-zinc-300 cursor-pointer font-semibold text-xs py-2 px-2 rounded hover:bg-[#243eff]/10 transition">Services</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { setMenuOpen(false); navigate('/clients'); }} className="text-zinc-300 cursor-pointer font-semibold text-xs py-2 px-2 rounded hover:bg-[#243eff]/10 transition">Clients</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { setMenuOpen(false); navigate('/why-zenmedia'); }} className="text-zinc-300 cursor-pointer font-semibold text-xs py-2 px-2 rounded hover:bg-[#243eff]/10 transition">Why ZenMedia?</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { setMenuOpen(false); navigate('/faqs'); }} className="text-zinc-300 cursor-pointer font-semibold text-xs py-2 px-2 rounded hover:bg-[#243eff]/10 transition">FAQs</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => { setMenuOpen(false); navigate('/feedback'); }} className="text-zinc-300 cursor-pointer font-semibold text-xs py-2 px-2 rounded hover:bg-[#243eff]/10 transition">Feedback</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <Button className={chatNowClass} onClick={handleChatNow}>Chat Now</Button>

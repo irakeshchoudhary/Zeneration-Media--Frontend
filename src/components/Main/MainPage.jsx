@@ -1,28 +1,40 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "../ui/button";
-import { Loader2, VolumeOff, Volume2 } from "lucide-react";
+import { Loader2, VolumeOff, Volume2, PlayCircle, Globe } from "lucide-react";
 import LeadFormDialog from "./LeadFormDialog";
 import { Helmet } from 'react-helmet-async';
+import LanguageSelectionDialog from './LanguageSelectionDialog';
 
 function MainPage() {
     // --- State ---
-    const [videoPlaying, setVideoPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [videoMuted, setVideoMuted] = useState(true);
     const [videoDuration, setVideoDuration] = useState(0);
     const [videoCurrent, setVideoCurrent] = useState(0);
     const [showControls, setShowControls] = useState(false);
+    const [activeVideoSrc, setActiveVideoSrc] = useState(null);
+    const [showLanguageSelectionDialog, setShowLanguageSelectionDialog] = useState(false);
+    const [currentVideoLanguage, setCurrentVideoLanguage] = useState(null);
+
     const videoRef = useRef(null);
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-    // Video controls
+    // Language-specific video paths
+    const videoPaths = {
+        english: "/Videos/HeroVideo_English.mp4",
+        hindi: "/Videos/HeroVideo_Hindi.mp4"
+    };
+    const thumbnailSrc = "https://i.pinimg.com/736x/69/bc/e4/69bce4f9e488bf4538f7dcd309260b55.jpg";
+
+    // --- Video controls ---
     const handleVideoToggle = () => {
         if (videoRef.current) {
-            if (videoPlaying) {
+            if (isPlaying) {
                 videoRef.current.pause();
             } else {
                 videoRef.current.play();
             }
-            setVideoPlaying(!videoPlaying);
+            setIsPlaying(!isPlaying);
         }
     };
     const handleMuteToggle = () => {
@@ -34,6 +46,9 @@ function MainPage() {
     const handleLoadedMetadata = () => {
         if (videoRef.current) {
             setVideoDuration(videoRef.current.duration);
+            if (isPlaying) {
+                videoRef.current.play();
+            }
         }
     };
     const handleTimeUpdate = () => {
@@ -49,8 +64,50 @@ function MainPage() {
         }
     };
     const handleVideoContainerClick = () => {
-        if (isMobile) setShowControls((prev) => !prev);
+        // This function will now be removed from the outer div's onClick
+        // if (isMobile) setShowControls((prev) => !prev);
     };
+
+    // --- New Language Selection Logic ---
+    const handlePlayButtonClick = () => {
+        console.log("Play button clicked! Opening language dialog."); // Debugging log
+        setShowLanguageSelectionDialog(true);
+    };
+
+    const handleLanguageSelect = (language) => {
+        const selectedPath = videoPaths[language];
+        if (selectedPath) {
+            setActiveVideoSrc(selectedPath);
+            setCurrentVideoLanguage(language);
+            setShowLanguageSelectionDialog(false);
+            setIsPlaying(true); // Automatically play after selection
+        }
+    };
+
+    // --- Language Switch Logic ---
+    const handleLanguageSwitch = () => {
+        const newLanguage = currentVideoLanguage === 'english' ? 'hindi' : 'english';
+        const newPath = videoPaths[newLanguage];
+        if (newPath) {
+            setActiveVideoSrc(newPath);
+            setCurrentVideoLanguage(newLanguage);
+            setIsPlaying(true); // Ensure it plays after switch
+            if (videoRef.current) {
+                videoRef.current.currentTime = 0; // Start from beginning on language switch
+            }
+        }
+    };
+
+    // Effect to play video once src is set
+    useEffect(() => {
+        if (activeVideoSrc && videoRef.current && isPlaying) {
+            videoRef.current.load(); // Reload video with new src
+            videoRef.current.play().catch(error => {
+                console.error("Error attempting to play video:", error);
+                // Handle autoplay restrictions if needed (e.g., show a play button again)
+            });
+        }
+    }, [activeVideoSrc, isPlaying]);
 
     // --- Main Render ---
     return (
@@ -59,7 +116,7 @@ function MainPage() {
                 <title>Zeneration Media - Best Marketing Agency in Kalyan</title>
                 <meta name="description" content="Zeneration Media: Your go-to marketing agency in Kalyan. We provide full funnel marketing services and drive local business leads for small businesses. Achieve transformative results." />
             </Helmet>
-            <section className="relative flex flex-col items-center justify-center w-full mt-20 mb-16 sm:mt-24 md:mt-32">
+            <section className="relative flex flex-col items-center justify-center w-full mt-8 mb-16 sm:mt-10 md:mt-6">
                 <h1
                     className="text-center text-white text-nowrap"
                     style={{ fontFamily: 'Gilroy-Black', fontSize: 'clamp(1.5rem, 5vw, 3.8rem)', lineHeight: 1.08 }}
@@ -77,19 +134,33 @@ function MainPage() {
                         className="relative w-full max-w-[850px] h-[50vw] max-h-[450px] min-h-[220px] rounded-xl overflow-hidden bg-[#181818] shadow-2xl flex flex-col justify-end"
                         onMouseEnter={() => !isMobile && setShowControls(true)}
                         onMouseLeave={() => !isMobile && setShowControls(false)}
-                        onClick={handleVideoContainerClick}
                     >
-                        <video
-                            ref={videoRef}
-                            src="/Videos/HeroVideo.mp4"
-                            className="object-cover w-full h-full"
-                            autoPlay
-                            loop
-                            muted={videoMuted}
-                            onLoadedMetadata={handleLoadedMetadata}
-                            onTimeUpdate={handleTimeUpdate}
-                        />
-                        {(showControls || !isMobile) && (
+                        {!activeVideoSrc ? (
+                            // Thumbnail and Play Button
+                            <div
+                                className="absolute inset-0 flex items-center justify-center z-20"
+                                style={{ backgroundImage: `url(${thumbnailSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                            >
+                                <button
+                                    onClick={handlePlayButtonClick}
+                                    className="bg-transparent border-none p-0 cursor-pointer focus:outline-none z-30"
+                                >
+                                    <PlayCircle className="w-20 h-20 text-white opacity-80 hover:opacity-100 transition-opacity" />
+                                </button>
+                            </div>
+                        ) : (
+                            // Video Player
+                            <video
+                                ref={videoRef}
+                                src={activeVideoSrc}
+                                className="object-cover w-full h-full"
+                                muted={videoMuted}
+                                onLoadedMetadata={handleLoadedMetadata}
+                                onTimeUpdate={handleTimeUpdate}
+                            />
+                        )}
+
+                        {activeVideoSrc && (showControls || !isMobile) && (
                             <>
                                 <div className="absolute bottom-4 left-4 flex items-center gap-2 z-10">
                                     <button
@@ -97,7 +168,7 @@ function MainPage() {
                                         className="bg-transparent cursor-pointer text-white rounded-full px-3 py-1 text-sm font-semibold shadow-lg hover:bg-black/90 transition sm:px-4 sm:py-2"
                                         style={{ fontFamily: 'Gilroy-SemiBold' }}
                                     >
-                                        {videoPlaying ? 'Pause' : 'Play'}
+                                        {isPlaying ? 'Pause' : 'Play'}
                                     </button>
                                     <button
                                         onClick={handleMuteToggle}
@@ -106,6 +177,16 @@ function MainPage() {
                                         aria-label="Toggle sound"
                                     >
                                         {videoMuted ? <span role="img" aria-label="Muted"><VolumeOff size={18} sm:size={20} /></span> : <span role="img" aria-label="Unmuted"><Volume2 size={18} sm:size={20} /></span>}
+                                    </button>
+                                </div>
+                                <div className="absolute bottom-4 right-4 z-10">
+                                    <button
+                                        onClick={handleLanguageSwitch}
+                                        className="bg-transparent cursor-pointer text-white rounded-full p-1 shadow-lg hover:bg-black/90 transition flex items-center justify-center sm:p-2"
+                                        style={{ fontFamily: 'Gilroy-SemiBold' }}
+                                        aria-label="Switch language"
+                                    >
+                                        <Globe size={18} sm:size={20} />
                                     </button>
                                 </div>
                                 <input
@@ -138,6 +219,11 @@ function MainPage() {
                 </div>
                 <LeadFormDialog triggerButtonText="Book Free Strategy Call" />
             </section>
+            <LanguageSelectionDialog
+                isOpen={showLanguageSelectionDialog}
+                onClose={() => setShowLanguageSelectionDialog(false)}
+                onLanguageSelect={handleLanguageSelect}
+            />
         </>
     );
 }

@@ -97,18 +97,19 @@ const Footer = () => {
                         </div>
                         {/* SITE & SOCIAL for mobile below logo, for desktop on right */}
                         <div className='flex md:flex-row items-center md:items-start gap-6 md:gap-18 w-full md:w-auto mt-6 md:mt-0'>
-                            <div className='flex flex-col justify-center gap-1 items-left md:items-start'>
+                            <div className='flex flex-col justify-center gap-1 items-left text-white md:items-start'>
                                 <h4 className='text-sm font-["Gilroy-SemiBold"] text-white mb-2'>SITE</h4>
-                                <Link to="/services" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Services</Link>
-                                <Link to="/contact" className='text-xs font-["F3"] cursor-pointer text-nowrap hover:text-zinc-400 transition-all ease-in-out duration-300'>Contact Us</Link>
-                                <Link to="/about" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>About</Link>
-                                <Link to="/faqs" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>FAQs</Link>
+                                <Link to="/services" className='text-xs font-["F3"] cursor-pointer text-white hover:text-zinc-400 transition-all ease-in-out duration-300'>Services</Link>
+                                <Link to="/contact" className='text-xs font-["F3"] cursor-pointer text-white text-nowrap hover:text-zinc-400 transition-all ease-in-out duration-300'>Contact Us</Link>
+                                <Link to="/about" className='text-xs font-["F3"] cursor-pointer text-white hover:text-zinc-400 transition-all ease-in-out duration-300'>About</Link>
+                                <Link to="/faqs" className='text-xs font-["F3"] cursor-pointer text-white hover:text-zinc-400 transition-all ease-in-out duration-300'>FAQs</Link>
+                                <Link to="/feedback" className='text-xs font-["F3"] cursor-pointer text-white hover:text-zinc-400 transition-all ease-in-out duration-300'>Feedback</Link>
                             </div>
-                            <div className='flex flex-col justify-center mb-5 gap-1 items-left md:items-start'>
+                            <div className='flex flex-col justify-center mb-5 gap-1 text-white items-left md:items-start'>
                                 <h4 className='text-sm font-["Gilroy-SemiBold"] text-white mb-2'>SOCIAL</h4>
-                                <a href="https://instagram.com/zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Instagram</a>
-                                <a href="https://facebook.com/zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Facebook</a>
-                                <a href="https://youtube.com/@zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Youtube</a>
+                                <a href="https://instagram.com/zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] text-white cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Instagram</a>
+                                <a href="https://facebook.com/zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] text-white cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Facebook</a>
+                                <a href="https://youtube.com/@zenerationmedia" target="_blank" rel="noopener noreferrer" className='text-xs font-["F3"] text-white cursor-pointer hover:text-zinc-400 transition-all ease-in-out duration-300'>Youtube</a>
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ const api = axios.create({
 export const subscribe = async (email) => {
     try {
         const response = await api.post('/subscribe', { email });
+        localStorage.setItem('userEmail', email);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -23,10 +24,25 @@ export const subscribe = async (email) => {
 export const submitLeadForm = async (formData) => {
     try {
         const response = await api.post('/form-filling', formData);
+        localStorage.setItem('userEmail', formData.email);
         return response.data;
     } catch (error) {
         if (error.response) {
             throw new Error(error.response.data.message);
+        } else {
+            throw new Error('Network error');
+        }
+    }
+};
+
+// New: Submit Feedback API
+export const submitFeedback = async (feedbackData) => {
+    try {
+        const response = await api.post('/api/feedback/submit', feedbackData);
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(error.response.data.message || error.response.data.error || 'Feedback submission failed.');
         } else {
             throw new Error('Network error');
         }

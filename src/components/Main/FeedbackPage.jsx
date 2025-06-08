@@ -4,11 +4,13 @@ import HalfCircleBlue from '../../../public/Photos/HalfCircleBlue.png';
 import { Button } from '../ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import FeedbackFormDialog from './FeedbackFormDialog';
 
 const FeedbackPage = () => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
     const [showSpotlight, setShowSpotlight] = useState(false);
+    const [isFormOpen, setIsFormOpen] = useState(false);
     const imageRef = useRef(null);
     const containerRef = useRef(null);
     const imageWrapperRef = useRef(null);
@@ -45,14 +47,22 @@ const FeedbackPage = () => {
         setShowSpotlight(false);
     };
 
+    const handleGetStartedClick = () => {
+        setIsFormOpen(true);
+    };
+
+    const handleCloseForm = () => {
+        setIsFormOpen(false);
+    };
+
     return (
         <div
             ref={containerRef}
-            className="flex justify-center items-center min-h-screen p-5 box-border mx-auto w-[65%] relative overflow-hidden"
+            className="flex justify-center items-center min-h-screen p-4 sm:p-6 md:p-8 lg:p-10 box-border mx-auto w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[65%] relative overflow-hidden"
         >
-            {/* Decorative background elements */}
+            {/* Decorative background elements
             <motion.div
-                className="absolute -top-40 -right-40 opacity-20"
+                className="absolute hidden sm:block sm:w-[3000px] sm:-top-20 sm:-right-20 md:w-[4000px] md:-top-30 md:-right-30 lg:w-[500px] lg:-top-40 lg:-right-40 opacity-10 md:opacity-20"
                 initial={{ scale: 0.8, rotate: -30 }}
                 animate={{ rotate: [0, 5, 0] }}
                 transition={{
@@ -64,19 +74,19 @@ const FeedbackPage = () => {
                 <img
                     src={HalfCircleBlue}
                     alt="Decorative background"
-                    className="w-[500px]"
+                    className="w-full"
                 />
-            </motion.div>
+            </motion.div> */}
 
             <div className="flex flex-col font-['F3'] md:flex-row items-center justify-around w-full max-w-6xl z-[50]">
                 <motion.div
-                    className="flex-1 p-5 text-left md:text-left"
+                    className="flex-1 p-4 sm:p-5 text-left md:text-left"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
                 >
                     <motion.h1
-                        className="text-4xl mb-5"
+                        className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-5"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
@@ -84,7 +94,7 @@ const FeedbackPage = () => {
                         Your Voice Matters to Us
                     </motion.h1>
                     <motion.p
-                        className="text-sm leading-relaxed mb-8"
+                        className="text-xs sm:text-sm md:text-base leading-normal sm:leading-relaxed mb-6 sm:mb-8"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
@@ -99,7 +109,10 @@ const FeedbackPage = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.6 }}
                     >
-                        <Button className="cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 group">
+                        <Button
+                            className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white flex items-center"
+                            onClick={handleGetStartedClick}
+                        >
                             Get Started
                             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
@@ -107,14 +120,14 @@ const FeedbackPage = () => {
                 </motion.div>
 
                 <motion.div
-                    className="flex-1 flex justify-center items-center p-5 relative"
+                    className="flex-1 flex justify-center items-center p-4 sm:p-5 relative"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.7, delay: 0.3 }}
                 >
                     <div
                         ref={imageWrapperRef}
-                        className="relative rounded-lg overflow-hidden w-full max-w-md h-[400px]"
+                        className="relative rounded-lg cursor-none overflow-hidden w-full sm:max-w-sm md:max-w-md h-64 sm:h-80 md:h-[400px]"
                         onMouseMove={handleMouseMove}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
@@ -139,7 +152,7 @@ const FeedbackPage = () => {
                                     : 'none',
                                 transition: 'opacity 0.5s ease, mask-image 0.1s linear, -webkit-mask-image 0.1s linear'
                             }}
-                        />
+                        ></div>
 
                         {/* Spotlight glow effect */}
                         {showSpotlight && (
@@ -204,6 +217,7 @@ const FeedbackPage = () => {
                     </div>
                 </motion.div>
             </div>
+            <FeedbackFormDialog isOpen={isFormOpen} onClose={handleCloseForm} />
         </div>
     )
 }

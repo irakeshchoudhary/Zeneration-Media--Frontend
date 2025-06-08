@@ -55,7 +55,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen bg-black overflow-x-hidden">
       {/* Grainy background - z-0 */}
       {!isServices && (
         <div className="absolute inset-0 z-0 pointer-events-none">

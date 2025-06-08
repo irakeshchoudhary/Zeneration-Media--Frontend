@@ -13,7 +13,7 @@ const FeedBack = () => {
         <button
             onClick={handleFeedbackClick}
             aria-label="Feedback"
-            className="cursor-pointer items-center fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-gradient-to-b from-[#243eff] to-[#1b34ff] text-white px-2 py-3 rounded-r-md shadow-md hover:shadow-xl transition-all duration-300 ease-in-out group hover:translate-x-0 -translate-x-[calc(100%-5px)]"
+            className="cursor-pointer items-center fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-gradient-to-b from-[#243eff] to-[#1b34ff] text-white px-2 py-3 rounded-r-md shadow-md hover:shadow-xl transition-all duration-300 ease-in-out group hover:translate-x-0 -translate-x-[calc(100%-5px)] hidden md:flex"
             style={{
                 writingMode: 'horizontal-rl',
                 textOrientation: 'mixed',

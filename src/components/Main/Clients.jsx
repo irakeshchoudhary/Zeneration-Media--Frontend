@@ -309,7 +309,7 @@ const Clients = () => {
             {/* View More Details Button */}
             <motion.button
                 onClick={() => setShowDetails(!showDetails)}
-                className="mt-8 px-5 py-2 bg-zinc-900 text-white rounded-full flex items-center gap-2 hover:bg-zinc-800 transition-all duration-300 text-sm"
+                className="mt-8 px-5 py-2 cursor-pointer bg-zinc-900 text-white rounded-full flex items-center gap-2 hover:bg-zinc-800 transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
             >
