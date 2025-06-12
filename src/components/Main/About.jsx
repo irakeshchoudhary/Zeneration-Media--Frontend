@@ -82,7 +82,7 @@ const About = () => {
                     </span>
                 </button>
 
-                <div className="flex flex-wrap items-center justify-center gap-8 mt-6">
+                {/* <div className="flex flex-wrap items-center justify-center gap-8 mt-6">
                     {[
                         {
                             name: "Vikas Dubey",
@@ -117,7 +117,7 @@ const About = () => {
                             </div>
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
             {/* Animated Subscribe Card */}
             <AnimatePresence>

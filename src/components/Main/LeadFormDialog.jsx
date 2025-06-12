@@ -44,6 +44,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
         }
         setLoading(true);
         try {
+            console.log("Submitting Lead Form:", form);
             await submitLeadForm(form);
             setShowSuccess(true);
             setOpen(false);
@@ -54,7 +55,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
         } catch (err) {
             setError(err.message);
         }
-        setLoading(false);
+        setLoading(false);  
     };
 
     // Overlay for background dull + image
@@ -218,7 +219,7 @@ export default function LeadFormDialog({ triggerButtonText = "Book Free Strategy
                                         className="bg-white text-black hover:bg-zinc-200"
                                         disabled={loading}
                                     >
-                                        {loading ? <Loader2 className="animate-spin mr-2" size={16} /> : 'Submit'}
+                                        {loading ? <Loader2 className="animate-spin" size={16} /> : 'Submit'}
                                     </Button>
                                 </div>
                             </form>
