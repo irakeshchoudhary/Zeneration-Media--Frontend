@@ -19,9 +19,9 @@ const WhyZenmedia = lazy(() => import("./components/Main/WhyZenmedia"));
 const FeedbackPage = lazy(() => import("./components/Main/FeedbackPage"));
 
 const pageTransition = {
-  initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] } },
-  exit: { opacity: 0, y: -40, transition: { duration: 0.5, ease: [0.77, 0, 0.175, 1] } },
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } },
 };
 
 const App = () => {
@@ -86,131 +86,171 @@ const App = () => {
             <Route
               path="/"
               element={
-                <motion.div {...pageTransition}>
-                  {loading && <Preloader onFinish={() => setLoading(false)} />}
+                <>
                   <div className="fixed top-0 left-0 w-full z-[100]">
                     <Navbar />
                   </div>
-                  <div className="Hero relative overflow-hidden pt-24 md:pt-32 p-4 md:p-6 h-auto z-10">
-                    <div
-                      className="absolute inset-0 w-full h-full pointer-events-none z-10"
-                      style={{
-                        backgroundImage: "url('/Photos/HalfCircleBg.png')",
-                        backgroundPosition: "center 60%",
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        mixBlendMode: "luminosity",
-                        transform: "rotate(180deg)",
-                        opacity: 0.15,
-                      }}
-                    ></div>
-                    <div className="relative z-20">
-                      <MainPage />
+                  <motion.div {...pageTransition}>
+                    {loading && <Preloader onFinish={() => setLoading(false)} />}
+                    <div className="Hero relative overflow-hidden pt-24 md:pt-32 p-4 md:p-6 h-auto z-10">
+                      <div
+                        className="absolute inset-0 w-full h-full pointer-events-none z-10"
+                        style={{
+                          backgroundImage: "url('/Photos/HalfCircleBlue.png')",
+                          backgroundPosition: "center 60%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundSize: "cover",
+                          mixBlendMode: "luminosity",
+                          transform: "rotate(180deg)",
+                          opacity: 0.15,
+                        }}
+                      ></div>
+                      <div className="relative z-20">
+                        <MainPage />
+                      </div>
                     </div>
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
                   </div>
-                  <Footer />
-                </motion.div>
+                </>
               }
             />
             {/* Services Route */}
             <Route
               path="/services"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <Services />
-                  <Footer />
-                </motion.div>
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
+                  </div>
+                  <motion.div {...pageTransition}>
+                    <Services />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* Clients Route */}
             <Route
               path="/clients"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4">
-                    <Clients />
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
                   </div>
-                  <Footer />
-                </motion.div>
+                  <motion.div {...pageTransition} className="pt-24 px-4">
+                    <Clients />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* Why Zenmedia Route */}
             <Route
               path="/why-zenmedia"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4">
-                    <WhyZenmedia />
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
                   </div>
-                  <Footer />
-                </motion.div>
+                  <motion.div {...pageTransition} className="pt-24 px-4">
+                    <WhyZenmedia />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* FAQs Route */}
             <Route
               path="/faqs"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4">
-                    <FAQs />
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
                   </div>
-                  <Footer />
-                </motion.div>
+                  <motion.div {...pageTransition} className="pt-24 px-4">
+                    <FAQs />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* About Route */}
             <Route
               path="/about"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4">
-                    <About />
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
                   </div>
-                  <Footer />
-                </motion.div>
+                  <motion.div {...pageTransition} className="pt-24 px-4">
+                    <About />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* Contact Route */}
             <Route
               path="/contact"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4">
-                    <Contact />
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
                   </div>
-                  <Footer />
-                </motion.div>
+                  <motion.div {...pageTransition} className="pt-24 px-4">
+                    <Contact />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* Feedback Route */}
             <Route
               path="/feedback"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <FeedbackPage />
-                  <Footer />
-                </motion.div>
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
+                  </div>
+                  <motion.div {...pageTransition}>
+                    <FeedbackPage />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
+                  </div>
+                </>
               }
             />
             {/* 404 fallback */}
             <Route
               path="*"
               element={
-                <motion.div {...pageTransition}>
-                  <Navbar />
-                  <div className="pt-24 px-4 text-center text-white min-h-[calc(100vh-var(--navbar-height)-var(--footer-height))] flex flex-col items-center justify-center">
+                <>
+                  <div className="fixed top-0 left-0 w-full z-[100]">
+                    <Navbar />
+                  </div>
+                  <motion.div {...pageTransition} className="pt-24 px-4 text-center text-white min-h-[calc(100vh-var(--navbar-height)-var(--footer-height))] flex flex-col items-center justify-center">
                     <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
                     <p className="text-lg text-zinc-500">Sorry, the page you are looking for does not exist.</p>
+                  </motion.div>
+                  <div className="relative z-10">
+                    <Footer />
                   </div>
-                  <Footer />
-                </motion.div>
+                </>
               }
             />
           </Routes>

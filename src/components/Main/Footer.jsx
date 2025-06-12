@@ -67,7 +67,7 @@ const Footer = () => {
                                 onBlur={() => setTouched(true)}
                             />
                             <Button
-                                className={`w-full md:w-auto mt-2 md:mt-0 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 font-['F3'] font-bold px-6 py-2 bg-white select-none ${isButtonDisabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'} transition-all`}
+                                className={`w-full md:w-auto mt-2 md:mt-0 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 font-['F3'] font-bold px-6 py-2 bg-white z-[50] select-none ${isButtonDisabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'} transition-all`}
                                 onClick={isButtonDisabled ? undefined : handleSubscribe}
                                 disabled={isButtonDisabled}
                             >

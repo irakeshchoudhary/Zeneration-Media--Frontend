@@ -30,7 +30,7 @@ const Navbar = () => {
 
   // NavLink active style
   const navLinkClass = ({ isActive }) =>
-    `hover:text-zinc-500 transition-all ease-in-out font-['Gilroy-Bold'] text-white/50 px-2 py-1 ${isActive ? 'text-zinc-100 underline underline-offset-4' : ''}`;
+    `hover:text-zinc-300 transition-all ease-in-out font-['Gilroy-Bold'] text-white px-2 py-1 ${isActive ? 'text-zinc-100 underline underline-offset-4 transition-all duration-300' : ''}`;
 
   // Logo src
   const logoSrc = isServices ? '/Logo/EyeLogo-TransparentBg.png' : '/Logo/EyeLogo.jpg';

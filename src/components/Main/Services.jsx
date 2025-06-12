@@ -199,28 +199,50 @@ export default function Services() {
                         className="mt-16 md:mt-20 flex flex-col md:flex-row items-start gap-10 relative"
                     >
                         {/* Mobile View - Simple Linear Layout */}
-                        <div className="md:hidden w-full flex flex-col gap-8">
+                        <div className="md:hidden w-full flex flex-col gap-12">
                             {highlightItems.map((item, index) => (
-                                <div key={index} className="flex flex-col gap-4">
-                                    <div className="text-left">
-                                        <p className="px-3 py-1 bg-[#131D1D] text-[#5B9983] text-xs rounded-full w-fit">
-                                            The Zeneration Media™
-                                        </p>
-                                        <h2 className="text-xl font-bold text-white mt-2">
+                                <motion.div
+                                    key={index}
+                                    className="flex flex-col gap-6 relative"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                >
+                                    <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#5B9983] to-transparent opacity-50"></div>
+                                    <div className="text-left relative">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <div className="w-2 h-2 rounded-full bg-[#5B9983] animate-pulse"></div>
+                                            <span className="text-[#5B9983] text-xs font-['F3']">Feature {index + 1}</span>
+                                        </div>
+                                        <h2 className="text-xl font-bold text-white leading-tight">
                                             {item.h2}
                                         </h2>
                                         <p className="text-sm text-zinc-400 leading-relaxed mt-2">
                                             {item.p}
                                         </p>
                                     </div>
-                                    <div className="flex justify-center w-full">
+                                    <div className="relative group">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                         <img
-                                            className="w-full max-w-xs object-cover rounded-xl"
+                                            className="w-full h-48 object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.02]"
                                             src={item.img}
                                             alt={item.h2}
                                         />
+                                        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <Button className="bg-[#5B9983] hover:bg-[#4e856f] text-white text-xs px-3 py-1 rounded-full">
+                                                Learn More
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
+                                    {index !== highlightItems.length - 1 && (
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#0C1012] flex items-center justify-center">
+                                            <svg className="w-4 h-4 text-[#5B9983]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                            </svg>
+                                        </div>
+                                    )}
+                                </motion.div>
                             ))}
                         </div>
 
@@ -302,7 +324,7 @@ export default function Services() {
                                 width={500}
                                 height={500}
                                 alt="linear demo image"
-                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[20%] grayscale filter -bottom-10 object-contain rounded-2xl" />
+                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[44%] grayscale filter -bottom-14 object-contain rounded-2xl opacity-80 hover:opacity-100 transition-opacity duration-300" />
                         </WobbleCard>
                         <WobbleCard containerClassName="col-span-1 min-h-[300px]">
                             <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
@@ -329,7 +351,7 @@ export default function Services() {
                                 width={500}
                                 height={500}
                                 alt="linear demo image"
-                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[20%] lg:top-0 top-90 object-contain rounded-2xl" />
+                                className="absolute -right-20 md:-right-40 lg:-right-[40%] xl:-right-[20%] lg:top-40 top-60 object-contain rounded-2xl" />
                         </WobbleCard>
                     </div>
                     <div className="my-16 md:my-24 w-fit mx-auto text-center">
